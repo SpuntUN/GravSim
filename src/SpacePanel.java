@@ -1,18 +1,18 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class SpacePanel {
+public class SpacePanel extends JPanel{
 
-    private JPanel panel;
     private Space space;
 
     public SpacePanel(Space space) {
-        panel = new JPanel(new BorderLayout());
         this.space = space;
+        this.setLayout(new BorderLayout());
+        this.setBackground(Color.BLACK);
     }
 
-
-    public JPanel getRoot() {
-        return panel;
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
     }
 }
