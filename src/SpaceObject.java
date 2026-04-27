@@ -4,7 +4,7 @@ public class SpaceObject {
     private double mass;
     private Vector position;
     private Vector velocity;
-
+    private Vector force;
 
     public void update(double time, Vector force){
         Vector acceleration = Vector.divide(force, mass);
@@ -52,5 +52,13 @@ public class SpaceObject {
 
     public void setVelocity(Vector velocity) {
         this.velocity = velocity;
+    }
+
+    public Vector getForce() {
+        return force;
+    }
+
+    public void setForce(Vector force) {
+        this.force = force;
     }
 }
