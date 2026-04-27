@@ -28,12 +28,12 @@ public class Space {
             }
         }
 
-        for (int i = 0; i < masslessBodies.size(); i++){
-            for (int j = 0; j < massBodies.size(); j++){
-                Vector force = calculateForce(massBodies.get(i), massBodies.get(j));
-                masslessBodies.get(i).addForce(force);
+        for (SpaceObject massless : masslessBodies) {
+            for (SpaceObject mass : massBodies) {
+                massless.addForce(calculateForce(massless, mass));
             }
         }
+
 
         for (SpaceObject o : spaceObjects){
             o.update(time);
@@ -50,6 +50,10 @@ public class Space {
         double m2 = o2.getMass();
 
         return Vector.negate(Vector.multiply(r, G*m1*m2/Math.pow(distance, 3)));
+    }
+
+    public void addSpaceObject(SpaceObject o){
+        spaceObjects.add(o);
     }
 
 }

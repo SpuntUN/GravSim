@@ -6,6 +6,14 @@ public class SpaceObject {
     private Vector velocity;
     private Vector force;
 
+    public SpaceObject(String name, boolean massless, double mass, Vector position, Vector velocity) {
+        this.name = name;
+        this.massless = massless;
+        this.mass = mass;
+        this.position = position;
+        this.velocity = velocity;
+    }
+
     public void update(double time){
         Vector acceleration = Vector.divide(force, mass);
 
