@@ -80,6 +80,14 @@ public class SpaceObject {
         this.color = color;
     }
 
+    public double getRadius() {
+        return radius;
+    }
+
+    public void setRadius(double radius) {
+        this.radius = radius;
+    }
+
     public void setForce(Vector force) {
         this.force = force;
     }
