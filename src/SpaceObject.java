@@ -1,2 +1,56 @@
 public class SpaceObject {
+    private String name;
+    private boolean massless;
+    private double mass;
+    private Vector position;
+    private Vector velocity;
+
+
+    public void update(double time, Vector force){
+        Vector acceleration = Vector.divide(force, mass);
+
+        velocity = Vector.add(velocity, Vector.multiply(acceleration, time));
+        position = Vector.add(position, Vector.multiply(velocity, time));
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isMassless() {
+        return massless;
+    }
+
+    public void setMassless(boolean massless) {
+        this.massless = massless;
+    }
+
+    public double getMass() {
+        return mass;
+    }
+
+    public void setMass(double mass) {
+        this.mass = mass;
+    }
+
+    public Vector getPosition() {
+        return position;
+    }
+
+    public void setPosition(Vector position) {
+        this.position = position;
+    }
+
+    public Vector getVelocity() {
+        return velocity;
+    }
+
+    public void setVelocity(Vector velocity) {
+        this.velocity = velocity;
+    }
 }
