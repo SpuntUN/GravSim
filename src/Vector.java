@@ -49,6 +49,10 @@ public class Vector {
         return Math.sqrt(Math.pow(v.getX(), 2) + Math.pow(v.getY(), 2));
     }
 
+    public static Vector negate(Vector v){
+        return new Vector(-v.getX(), -v.getY());
+    }
+
     public double getX() {
         return x;
     }
