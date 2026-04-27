@@ -16,6 +16,24 @@ public class MainFrame {
         frame = new JFrame("The Only Place that hasn't been Corrupted by CAPITALISM!");
         space = new Space();
         spacePanel = new SpacePanel(space);
+
+        //BULLSHIT TE$STING
+        space.addSpaceObject(new SpaceObject(
+                "Sun",
+                false,
+                1.989e30,
+                new Vector(0, 0),
+                new Vector(0, 0),
+                6.9634e8
+        ));
+        space.addSpaceObject(new SpaceObject(
+                "Earth",
+                false,
+                5.972e24,
+                new Vector(1.496e11, 0),
+                new Vector(0, 29_780),
+                6.371e6
+        ));
     }
 
     public void init(){

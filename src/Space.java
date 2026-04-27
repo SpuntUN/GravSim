@@ -56,4 +56,7 @@ public class Space {
         spaceObjects.add(o);
     }
 
+    public ArrayList<SpaceObject> getSpaceObjects() {
+        return spaceObjects;
+    }
 }

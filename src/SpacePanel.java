@@ -14,5 +14,16 @@ public class SpacePanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+
+        Graphics2D g2d = (Graphics2D) g;
+
+        paintSpaceObjects(g2d);
+    }
+
+    private void paintSpaceObjects(Graphics2D g2d){
+        for (SpaceObject o : space.getSpaceObjects()){
+            g2d.setColor(o.getColor());
+            g2d.fillOval((int) o.getPosition().getX(), (int) o.getPosition().getX(), (int) o.getRadius(), (int) o.getRadius());
+        }
     }
 }
