@@ -11,35 +11,36 @@ public class Vector {
     }
 
     public static Vector add(Vector v1, Vector v2){
-        Vector v3 = new Vector();
-        v3.setX(v1.getX()+v2.getX());
-        v3.setY(v1.getY()+v2.getY());
+        return new Vector(v1.getX() + v2.getX(), v1.getY() + v2.getY());
+    }
 
-        return v3;
+    public static Vector add(Vector v1, double scalar){
+        return new Vector(v1.getX() + scalar, v1.getY() + scalar);
     }
 
     public static Vector subtract(Vector v1, Vector v2){
-        Vector v3 = new Vector();
-        v3.setX(v1.getX()-v2.getX());
-        v3.setY(v1.getY()-v2.getY());
+        return new Vector(v1.getX() - v2.getX(), v1.getY() - v2.getY());
+    }
 
-        return v3;
+    public static Vector subtract(Vector v1, double scalar){
+        return new Vector(v1.getX() - scalar, v1.getY() - scalar);
     }
 
     public static Vector multiply(Vector v1, Vector v2){
-        Vector v3 = new Vector();
-        v3.setX(v1.getX()*v2.getX());
-        v3.setY(v1.getY()*v2.getY());
-
-        return v3;
+        return new Vector(v1.getX() * v2.getX(), v1.getY() * v2.getY());
     }
 
-    public static Vector divide(Vector v1, Vector v2){
-        Vector v3 = new Vector();
-        v3.setX(v1.getX()/v2.getX());
-        v3.setY(v1.getY()/v2.getY());
+    public static Vector multiply(Vector v1, double scalar){
+        return new Vector(v1.getX() * scalar, v1.getY() * scalar);
+    }
 
-        return v3;
+
+    public static Vector divide(Vector v1, Vector v2){
+        return new Vector(v1.getX() / v2.getX(), v1.getY() / v2.getY());
+    }
+
+    public static Vector divide(Vector v1, double scalar){
+        return new Vector(v1.getX() / scalar, v1.getY() / scalar);
     }
 
     public static double normalize(Vector v){
