@@ -1,3 +1,5 @@
+import java.awt.*;
+
 public class SpaceObject {
     private String name;
     private boolean massless;
@@ -6,12 +8,16 @@ public class SpaceObject {
     private Vector velocity;
     private Vector force;
 
-    public SpaceObject(String name, boolean massless, double mass, Vector position, Vector velocity) {
+    private Color color;
+    private double radius;
+
+    public SpaceObject(String name, boolean massless, double mass, Vector position, Vector velocity, double radius) {
         this.name = name;
         this.massless = massless;
         this.mass = mass;
         this.position = position;
         this.velocity = velocity;
+        color = Color.WHITE;
     }
 
     public void update(double time){
@@ -64,6 +70,14 @@ public class SpaceObject {
 
     public Vector getForce() {
         return force;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 
     public void setForce(Vector force) {
