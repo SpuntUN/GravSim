@@ -6,7 +6,7 @@ public class SpaceObject {
     private Vector velocity;
     private Vector force;
 
-    public void update(double time, Vector force){
+    public void update(double time){
         Vector acceleration = Vector.divide(force, mass);
 
         velocity = Vector.add(velocity, Vector.multiply(acceleration, time));
@@ -60,5 +60,9 @@ public class SpaceObject {
 
     public void setForce(Vector force) {
         this.force = force;
+    }
+
+    public void addForce(Vector force) {
+        this.force = Vector.add(this.force, force);
     }
 }

@@ -8,8 +8,6 @@ public class Vector {
     }
 
     public Vector() {
-        this.x = 0;
-        this.y = 0;
     }
 
     public static Vector add(Vector v1, Vector v2){

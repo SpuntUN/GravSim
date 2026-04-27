@@ -22,9 +22,24 @@ public class Space {
 
         for (int i = 0; i < massBodies.size(); i++) {
             for (int j = i + 1; j < massBodies.size(); j++) {
-
+                Vector force = calculateForce(massBodies.get(i), massBodies.get(j));
+                massBodies.get(i).addForce(force);
+                massBodies.get(j).addForce(Vector.negate(force));
             }
         }
+
+        for (int i = 0; i < masslessBodies.size(); i++){
+            for (int j = 0; j < massBodies.size(); j++){
+                Vector force = calculateForce(massBodies.get(i), massBodies.get(j));
+                masslessBodies.get(i).addForce(force);
+            }
+        }
+
+        for (SpaceObject o : spaceObjects){
+            o.update(time);
+            o.setForce(new Vector(0, 0));
+        }
+
 
     }
 
