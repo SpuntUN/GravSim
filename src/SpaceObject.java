@@ -23,6 +23,18 @@ public class SpaceObject {
 
     }
 
+    public SpaceObject(String name, boolean massless, double mass, Vector position, Vector velocity, double radius, Color color) {
+        this.name = name;
+        this.massless = massless;
+        this.mass = mass;
+        this.position = position;
+        this.velocity = velocity;
+        this.radius = radius;
+        this.force = new Vector(0, 0);
+        this.color = color;
+
+    }
+
     public void update(double time){
         Vector acceleration = Vector.divide(force, mass);
 
