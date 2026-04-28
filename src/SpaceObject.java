@@ -20,6 +20,7 @@ public class SpaceObject {
         this.radius = radius;
         this.force = new Vector(0, 0);
         color = Color.WHITE;
+
     }
 
     public void update(double time){

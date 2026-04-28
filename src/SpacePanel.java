@@ -1,10 +1,15 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class SpacePanel extends JPanel{
 
     private Space space;
-    private double scale = 1;
+    private double scale = 1
+            ;
+    private Vector offset = new Vector(0, 0);
+    Vector pressedPos = new Vector(0, 0);
 
     public SpacePanel(Space space) {
         this.space = space;
@@ -26,12 +31,12 @@ public class SpacePanel extends JPanel{
 
     private void paintSpaceObjects(Graphics2D g2d){
         for (SpaceObject o : space.getSpaceObjects()){
+            Vector pos = Vector.divide(o.getPosition(), scale);
+            pos = Vector.add(pos, offset);
+            double rad = o.getRadius() / scale;
+
             g2d.setColor(o.getColor());
-            g2d.fillOval((int) (o.getPosition().getX()/scale), (int) (o.getPosition().getY()/scale), (int) (o.getRadius()/scale), (int) (o.getRadius()/scale));
-            if (o.getName().equals("Sun")){
-                System.out.println(o.getRadius());
-                System.out.println(o.getRadius()/scale);
-            }
+            g2d.fillOval((int) (pos.getX()), (int) (pos.getY()), (int) rad*2, (int) rad*2);
         }
     }
 
@@ -41,6 +46,8 @@ public class SpacePanel extends JPanel{
         this.setBackground(Color.BLACK);
 
         this.addMouseWheelListener(e -> {
+
+
             int rotation = e.getWheelRotation();
             if (rotation < 0) {
                 scale /= 1.1;
@@ -48,6 +55,31 @@ public class SpacePanel extends JPanel{
                scale *= 1.1;
             }
         });
+
+
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                pressedPos = new Vector(e.getX(), e.getY());
+                System.out.println(pressedPos);
+            }
+        });
+
+        this.addMouseMotionListener(new MouseAdapter() {
+
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                offset = Vector.add(offset, new Vector(e.getX(), e.getY()));
+                offset = Vector.subtract(offset, pressedPos);
+                pressedPos = new Vector(e.getX(), e.getY());
+            }
+        });
+
+
+    }
+
+    private void mouse(){
+
     }
 
 }

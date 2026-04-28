@@ -7,8 +7,8 @@ public class MainFrame {
     private Space space;
     private SpacePanel spacePanel;
 
-    private double dt = 1.0/120.0;
-    private double speed = 1;
+    private double dt = 1.0/1.0;
+    private double speed = 846000;
     private double accumulator = 0;
     private long lastTime;
 
@@ -22,7 +22,7 @@ public class MainFrame {
                 "Sun",
                 false,
                 1.989e30,
-                new Vector(0, 0),
+                new Vector(6.9634e8, 6.9634e8),
                 new Vector(0, 0),
                 6.9634e8
         ));
@@ -32,7 +32,7 @@ public class MainFrame {
                 5.972e24,
                 new Vector(1.496e11, 0),
                 new Vector(0, 29_780),
-                6.371e6
+                6.9634e8
         ));
     }
 
