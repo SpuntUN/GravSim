@@ -17,6 +17,7 @@ public class SpaceObject {
         this.mass = mass;
         this.position = position;
         this.velocity = velocity;
+        this.radius = radius;
         this.force = new Vector(0, 0);
         color = Color.WHITE;
     }
