@@ -12,6 +12,7 @@ public class MainFrame {
     private double accumulator = 0;
     private long lastTime;
 
+
     public MainFrame() {
         frame = new JFrame("The Only Place that hasn't been Corrupted by CAPITALISM!");
         space = new Space();
