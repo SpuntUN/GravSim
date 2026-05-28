@@ -67,9 +67,14 @@ public class SpacePanel extends JPanel{
                 pressedPos = mousePos;
             }
 
-
-
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
+                    spaceObjectPanel.setSpaceObject(null);
+                }
+            }
         });
+
 
         this.addMouseMotionListener(new MouseAdapter() {
             @Override

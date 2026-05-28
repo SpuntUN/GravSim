@@ -46,8 +46,7 @@ public class SpaceObjectPanel {
         int y = 0;
 
         addRow("Name:", String.valueOf(spaceObject.getName()), y++, c);
-        addRow("Massless:", String.valueOf(spaceObject.isMassless()), y++, c);
-        addRow("Mass:", String.valueOf(spaceObject.getMass()), y++, c);
+        addRow("Mass:", String.valueOf(spaceObject.getMassString()), y++, c);
         addRow("Distance:", String.valueOf(spaceObject.getDistanceString()), y++, c);
         addRow("Position:", String.valueOf(spaceObject.getPositionString()), y++, c);
         addRow("Speed:", String.valueOf(spaceObject.getSpeedString()), y++, c);

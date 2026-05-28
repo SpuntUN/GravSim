@@ -25,7 +25,7 @@ public class MainFrame {
         SpaceObject sun = new SpaceObject(
                 "Sun",
                 false,
-                1.989e30,
+                1.98847e30,
                 new Vector(0, 0),
                 new Vector(0, 0),
                 6.9634e9,

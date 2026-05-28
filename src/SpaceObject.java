@@ -76,6 +76,25 @@ public class SpaceObject {
         return mass;
     }
 
+    public String getMassString() {
+        double mass = getMass();
+
+        final double EARTH_MASS = 5.972e24;
+        final double SOLAR_MASS = 1.98847e30;
+
+        if (mass >= SOLAR_MASS/10) {
+            double solar = mass / SOLAR_MASS;
+            return String.format("%.4f Msun", solar);
+
+        } else if (mass >= EARTH_MASS/10) {
+            double earth = mass / EARTH_MASS;
+            return String.format("%.4f Mearth", earth);
+
+        } else {
+            return String.format("%.4f kg", mass);
+        }
+    }
+
     public void setMass(double mass) {
         this.mass = mass;
     }
