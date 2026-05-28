@@ -22,7 +22,19 @@ public class Transformer {
     }
 
     public SpaceObject TransformNewSpaceObject(SpaceObject spaceObject){
+        SpaceObject transformedObject = new SpaceObject(spaceObject);
 
+        Vector pos = transformedObject.getPosition();
+        double rad = transformedObject.getRadius();
+
+        pos = Vector.divide(pos, scale);
+        pos = Vector.add(pos, offset);
+        rad /= scale;
+
+        transformedObject.setPosition(pos);
+        transformedObject.setRadius(rad);
+
+        return transformedObject;
     }
 
     public double getScale() {

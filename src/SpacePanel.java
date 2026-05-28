@@ -30,9 +30,10 @@ public class SpacePanel extends JPanel{
 
     private void paintSpaceObjects(Graphics2D g2d){
         for (SpaceObject o : space.getSpaceObjects()){
-            Vector pos = Vector.divide(o.getPosition(), scale);
-            pos = Vector.add(pos, offset);
-            double rad = o.getRadius() / scale;
+
+            SpaceObject transformedObject = transformer.TransformNewSpaceObject(o);
+            Vector pos = transformedObject.getPosition();
+            double rad = transformedObject.getRadius();
 
             g2d.setColor(o.getColor());
             g2d.fillOval((int) (pos.getX()), (int) (pos.getY()), (int) rad*2, (int) rad*2);
@@ -50,7 +51,7 @@ public class SpacePanel extends JPanel{
             if (rotation < 0) {
                 transformer.scaleUp();
             } else {
-                transformer.scaleDown();
+                    transformer.scaleDown();
             }
         });
 
