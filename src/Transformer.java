@@ -2,7 +2,6 @@ public class Transformer {
     private double scale;
     private double scaleFactor;
     private Vector offset;
-    private Vector scaleOffset = new Vector(0, 0);
 
     public Transformer(double scale, Vector offset){
         this.scale = scale;
@@ -73,20 +72,21 @@ public class Transformer {
     }
 
 
-    public void setScaleOffset(Vector mousePos){
-        scaleOffset = Vector.negate(Vector.divide(mousePos, 10));
-    }
+    public void zoomAt(Vector mouse, boolean zoomIn) {
 
-    public void scaleDown(){
-        scale *= scaleFactor;
-        scaleOffset = Vector.divide(scaleOffset, scaleFactor);
-        offset = Vector.subtract(offset, scaleOffset);
-    }
+        double oldScale = scale;
 
-    public void scaleUp(){
-        scale /= scaleFactor;
-        scaleOffset = Vector.multiply(scaleOffset, scaleFactor);
-        offset = Vector.add(offset, scaleOffset);
+        if (zoomIn) {
+            scale /= scaleFactor;
+        } else {
+            scale *= scaleFactor;
+        }
+
+        // world position under mouse BEFORE zoom
+        Vector world = Vector.multiply(Vector.subtract(mouse, offset), oldScale);
+
+        // recompute offset so mouse stays fixed
+        offset = Vector.subtract(mouse, Vector.divide(world, scale));
     }
 
 }

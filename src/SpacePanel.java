@@ -35,7 +35,7 @@ public class SpacePanel extends JPanel{
             double rad = transformedObject.getRadius();
 
             g2d.setColor(o.getColor());
-            g2d.fillOval((int) (pos.getX()), (int) (pos.getY()), (int) rad*2, (int) rad*2);
+            g2d.fillOval((int)(pos.getX() - rad), (int)(pos.getY() - rad), (int)(rad * 2), (int)(rad * 2));
         }
     }
 
@@ -46,13 +46,10 @@ public class SpacePanel extends JPanel{
 
         this.addMouseWheelListener(e -> {
 
-            transformer.setScaleOffset(new Vector(e.getX(), e.getY()));
             int rotation = e.getWheelRotation();
-            if (rotation < 0) {
-                transformer.scaleUp();
-            } else {
-                transformer.scaleDown();
-            }
+
+            transformer.zoomAt(new Vector(e.getX(), e.getY()), rotation < 0);
+            repaint();
         });
 
 
