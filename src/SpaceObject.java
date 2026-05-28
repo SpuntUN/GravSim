@@ -84,6 +84,49 @@ public class SpaceObject {
         return position;
     }
 
+    public String getPositionString() {
+        double distance = getDistance();
+
+        double x = position.getX();
+        double y = position.getY();
+
+
+        final double KM_THRESHOLD = 1e3;
+        final double AU_THRESHOLD = 1.496e11;
+
+        if (distance >= AU_THRESHOLD/10) {
+            return String.format("[%.4f, %.4f] AU", x / AU_THRESHOLD, y / AU_THRESHOLD);
+
+        } else if (distance >= KM_THRESHOLD) {
+            return String.format("[%.4f, %.4f] km", x / 1000.0, y / 1000.0);
+
+        } else {
+            return String.format("[%.4f, %.4f] m", x, y);
+        }
+    }
+
+
+    public double getDistance(){
+        return Vector.normalize(position);
+    }
+
+    public String getDistanceString(){
+        double distance = getDistance();
+
+        final double KM_THRESHOLD = 1e3;
+        final double AU_THRESHOLD = 1.496e11;
+
+        if (distance >= AU_THRESHOLD/10) {
+            return String.format("%.4f AU", distance/AU_THRESHOLD);
+
+        } else if (distance >= KM_THRESHOLD) {
+            return String.format("%.4f km", distance/KM_THRESHOLD);
+
+        } else {
+            return String.format("%.4f m", distance);
+        }
+    }
+
     public void setPosition(Vector position) {
         this.position = position;
     }
@@ -92,8 +135,37 @@ public class SpaceObject {
         return velocity;
     }
 
+    public String getVelocityString() {
+        double speed = getSpeed();
+
+        double x = velocity.getX();
+        double y = velocity.getY();
+
+        if (speed >= 1000.0) {
+            double xKm = x / 1000.0;
+            double yKm = y / 1000.0;
+            return String.format("[%.4f, %.4f] km/s", xKm, yKm);
+        } else {
+            return String.format("[%.4f, %.4f] m/s", x, y);
+        }
+    }
+
     public void setVelocity(Vector velocity) {
         this.velocity = velocity;
+    }
+
+    public double getSpeed(){
+        return Vector.normalize(velocity);
+    }
+
+    public String getSpeedString() {
+        double speed = getSpeed();
+
+        if (speed >= 1000.0) {
+            return String.format("%.4f km/s", speed / 1000.0);
+        } else {
+            return String.format("%.4f m/s", speed);
+        }
     }
 
     public Vector getForce() {
