@@ -41,7 +41,7 @@ public class MainFrame {
     }
 
     public void init(){
-        this.frame.setSize(1000, 1000);
+        this.frame.setSize(1920, 1080);
         this.frame.setLayout(new BorderLayout());
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setLocationRelativeTo(null);

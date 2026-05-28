@@ -6,11 +6,12 @@ import java.awt.event.MouseEvent;
 public class SpacePanel extends JPanel{
     private Space space;
     private Transformer transformer;
-    Vector pressedPos = new Vector(0, 0);
+    Vector pressedPos;
 
     public SpacePanel(Space space) {
         this.space = space;
         transformer = new Transformer(1e9);
+        pressedPos = new Vector();
         init();
     }
 

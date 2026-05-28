@@ -82,10 +82,8 @@ public class Transformer {
             scale *= scaleFactor;
         }
 
-        // world position under mouse BEFORE zoom
         Vector world = Vector.multiply(Vector.subtract(mouse, offset), oldScale);
 
-        // recompute offset so mouse stays fixed
         offset = Vector.subtract(mouse, Vector.divide(world, scale));
     }
 
