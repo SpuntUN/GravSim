@@ -55,18 +55,21 @@ public class SpacePanel extends JPanel{
 
 
         this.addMouseListener(new MouseAdapter() {
+
             @Override
             public void mousePressed(MouseEvent e) {
-                pressedPos = new Vector(e.getX(), e.getY());
+                Vector mousePos = new Vector(e.getX(), e.getY());
+                pressedPos = mousePos;
             }
         });
 
         this.addMouseMotionListener(new MouseAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                transformer.addOffset(new Vector(e.getX(), e.getY()));
+                Vector mousePos = new Vector(e.getX(), e.getY());
+                transformer.addOffset(mousePos);
                 transformer.subtractOffset(pressedPos);
-                pressedPos = new Vector(e.getX(), e.getY());
+                pressedPos = mousePos;
             }
         });
 

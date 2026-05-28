@@ -6,6 +6,7 @@ public class MainFrame {
     private JFrame frame;
     private Space space;
     private SpacePanel spacePanel;
+    private SpaceObjectPanel spaceObjectPanel;
 
     private double dt = 1.0/1.0;
     private double speed = 864000;
@@ -17,6 +18,7 @@ public class MainFrame {
         frame = new JFrame("The Only Place that hasn't been Corrupted by CAPITALISM!");
         space = new Space();
         spacePanel = new SpacePanel(space);
+        spaceObjectPanel = new SpaceObjectPanel();
 
         //BULLSHIT TE$STING
         space.addSpaceObject(new SpaceObject(
@@ -48,6 +50,20 @@ public class MainFrame {
         this.frame.setResizable(false);
 
         this.frame.add(spacePanel, BorderLayout.CENTER);
+
+        JSplitPane splitPane = new JSplitPane(
+                JSplitPane.HORIZONTAL_SPLIT,
+                spaceObjectPanel.getRoot(),
+                spacePanel
+        );
+
+        splitPane.setResizeWeight(0.2); // 20% left, 80% right
+        splitPane.setOneTouchExpandable(true);
+        splitPane.setDividerLocation(0.2);
+
+        frame.setContentPane(splitPane);
+
+
 
         this.frame.setVisible(true);
 
