@@ -17,8 +17,8 @@ public class MainFrame {
     public MainFrame() {
         frame = new JFrame("The Only Place that hasn't been Corrupted by CAPITALISM!");
         space = new Space();
-        spacePanel = new SpacePanel(space);
         spaceObjectPanel = new SpaceObjectPanel();
+        spacePanel = new SpacePanel(space, spaceObjectPanel);
 
 
         //BULLSHIT TE$STING

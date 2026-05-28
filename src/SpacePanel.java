@@ -5,11 +5,13 @@ import java.awt.event.MouseEvent;
 
 public class SpacePanel extends JPanel{
     private Space space;
+    private SpaceObjectPanel spaceObjectPanel;
     private Transformer transformer;
     Vector pressedPos;
 
-    public SpacePanel(Space space) {
+    public SpacePanel(Space space, SpaceObjectPanel spaceObjectPanel) {
         this.space = space;
+        this.spaceObjectPanel = spaceObjectPanel;
         transformer = new Transformer(1e9);
         pressedPos = new Vector();
         init();
@@ -59,8 +61,14 @@ public class SpacePanel extends JPanel{
             @Override
             public void mousePressed(MouseEvent e) {
                 Vector mousePos = new Vector(e.getX(), e.getY());
+                if (spaceObjectPressed(mousePos) != null){
+                    spaceObjectPanel.setSpaceObject(spaceObjectPressed(mousePos));
+                }
                 pressedPos = mousePos;
             }
+
+
+
         });
 
         this.addMouseMotionListener(new MouseAdapter() {
@@ -74,6 +82,23 @@ public class SpacePanel extends JPanel{
         });
 
 
+    }
+
+    private SpaceObject spaceObjectPressed(Vector mousePos){
+        for (SpaceObject o : space.getSpaceObjects()){
+            SpaceObject transformedObject = transformer.TransformNewSpaceObject(o);
+            Vector pos = transformedObject.getPosition();
+            double rad = transformedObject.getRadius();
+
+            Vector difference = Vector.subtract(mousePos, pos);
+            double x = difference.getX();
+            double y = difference.getY();
+
+            if (x <= rad && x >= -rad && y <= rad && y >= -rad){
+                return o;
+            }
+        }
+        return null;
     }
 
 }

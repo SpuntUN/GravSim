@@ -59,4 +59,7 @@ public class Space {
     public ArrayList<SpaceObject> getSpaceObjects() {
         return spaceObjects;
     }
+
+
+
 }
