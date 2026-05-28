@@ -20,8 +20,9 @@ public class MainFrame {
         spacePanel = new SpacePanel(space);
         spaceObjectPanel = new SpaceObjectPanel();
 
+
         //BULLSHIT TE$STING
-        space.addSpaceObject(new SpaceObject(
+        SpaceObject sun = new SpaceObject(
                 "Sun",
                 false,
                 1.989e30,
@@ -30,8 +31,8 @@ public class MainFrame {
                 6.9634e9,
                 Color.YELLOW
 
-        ));
-        space.addSpaceObject(new SpaceObject(
+        );
+        SpaceObject earth = new SpaceObject(
                 "Earth",
                 false,
                 5.972e24,
@@ -39,7 +40,11 @@ public class MainFrame {
                 new Vector(0, 29_780),
                 6.9634e9,
                 Color.BLUE
-        ));
+        );
+        space.addSpaceObject(sun);
+        space.addSpaceObject(earth);
+        spaceObjectPanel.setSpaceObject(earth);
+
     }
 
     public void init(){
@@ -50,18 +55,7 @@ public class MainFrame {
         this.frame.setResizable(false);
 
         this.frame.add(spacePanel, BorderLayout.CENTER);
-
-        JSplitPane splitPane = new JSplitPane(
-                JSplitPane.HORIZONTAL_SPLIT,
-                spaceObjectPanel.getRoot(),
-                spacePanel
-        );
-
-        splitPane.setResizeWeight(0.2); // 20% left, 80% right
-        splitPane.setOneTouchExpandable(true);
-        splitPane.setDividerLocation(0.2);
-
-        frame.setContentPane(splitPane);
+        this.frame.add(spaceObjectPanel.getRoot(), BorderLayout.WEST);
 
 
 
@@ -85,6 +79,7 @@ public class MainFrame {
             accumulator -= dt;
         }
 
+        spaceObjectPanel.refresh();
         spacePanel.repaint();
     }
 
