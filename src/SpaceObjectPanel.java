@@ -13,8 +13,9 @@ public class SpaceObjectPanel {
 
     public void init(){
         panel = new JPanel();
-        font = new Font("Arial", Font.PLAIN, 16);
+        font = new Font("Arial", Font.PLAIN, 20);
         this.panel.setLayout(new GridBagLayout());
+
 
 
         this.panel.setBackground(Color.WHITE);
@@ -73,13 +74,19 @@ public class SpaceObjectPanel {
         JLabel l2 = new JLabel(value);
         l2.setFont(font);
 
+        // force wrapping / width control
+        l2.setMaximumSize(new Dimension(300, Integer.MAX_VALUE));
+        l2.setPreferredSize(new Dimension(300, l2.getPreferredSize().height));
+
         c.gridy = y;
 
         c.gridx = 0;
-
+        c.weightx = 0;
         panel.add(l1, c);
 
         c.gridx = 1;
+        c.weightx = 1;
+        c.fill = GridBagConstraints.HORIZONTAL;
         panel.add(l2, c);
     }
 
