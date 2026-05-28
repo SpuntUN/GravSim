@@ -2,6 +2,7 @@ public class Transformer {
     private double scale;
     private double scaleFactor;
     private Vector offset;
+    private Vector scaleOffset = new Vector(0, 0);
 
     public Transformer(double scale, Vector offset){
         this.scale = scale;
@@ -11,7 +12,7 @@ public class Transformer {
 
     public Transformer(double scale) {
         this.scale = scale;
-        this.offset = new Vector(0, 0);
+        this.offset = new Vector();
         scaleFactor = 1.1;
     }
 
@@ -30,6 +31,7 @@ public class Transformer {
         pos = Vector.divide(pos, scale);
         pos = Vector.add(pos, offset);
         rad /= scale;
+
 
         transformedObject.setPosition(pos);
         transformedObject.setRadius(rad);
@@ -61,6 +63,7 @@ public class Transformer {
         this.scaleFactor = scaleFactor;
     }
 
+
     public void addOffset(Vector vector){
         offset = Vector.add(offset, vector);
     }
@@ -69,12 +72,21 @@ public class Transformer {
         offset = Vector.subtract(offset, vector);
     }
 
+
+    public void setScaleOffset(Vector mousePos){
+        scaleOffset = Vector.negate(Vector.divide(mousePos, 10));
+    }
+
     public void scaleDown(){
         scale *= scaleFactor;
+        scaleOffset = Vector.divide(scaleOffset, scaleFactor);
+        offset = Vector.subtract(offset, scaleOffset);
     }
 
     public void scaleUp(){
         scale /= scaleFactor;
+        scaleOffset = Vector.multiply(scaleOffset, scaleFactor);
+        offset = Vector.add(offset, scaleOffset);
     }
 
 }

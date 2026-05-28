@@ -4,7 +4,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class SpacePanel extends JPanel{
-
     private Space space;
     private Transformer transformer;
     Vector pressedPos = new Vector(0, 0);
@@ -47,11 +46,12 @@ public class SpacePanel extends JPanel{
 
         this.addMouseWheelListener(e -> {
 
+            transformer.setScaleOffset(new Vector(e.getX(), e.getY()));
             int rotation = e.getWheelRotation();
             if (rotation < 0) {
                 transformer.scaleUp();
             } else {
-                    transformer.scaleDown();
+                transformer.scaleDown();
             }
         });
 
@@ -60,12 +60,10 @@ public class SpacePanel extends JPanel{
             @Override
             public void mousePressed(MouseEvent e) {
                 pressedPos = new Vector(e.getX(), e.getY());
-                System.out.println(pressedPos);
             }
         });
 
         this.addMouseMotionListener(new MouseAdapter() {
-
             @Override
             public void mouseDragged(MouseEvent e) {
                 transformer.addOffset(new Vector(e.getX(), e.getY()));
@@ -74,10 +72,6 @@ public class SpacePanel extends JPanel{
             }
         });
 
-
-    }
-
-    private void mouse(){
 
     }
 
