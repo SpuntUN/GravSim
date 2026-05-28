@@ -8,7 +8,7 @@ public class MainFrame {
     private SpacePanel spacePanel;
 
     private double dt = 1.0/1.0;
-    private double speed = 846000;
+    private double speed = 864000;
     private double accumulator = 0;
     private long lastTime;
 
@@ -23,9 +23,11 @@ public class MainFrame {
                 "Sun",
                 false,
                 1.989e30,
-                new Vector(6.9634e8, 6.9634e8),
                 new Vector(0, 0),
-                6.9634e8
+                new Vector(0, 0),
+                6.9634e9,
+                Color.YELLOW
+
         ));
         space.addSpaceObject(new SpaceObject(
                 "Earth",
@@ -33,7 +35,8 @@ public class MainFrame {
                 5.972e24,
                 new Vector(1.496e11, 0),
                 new Vector(0, 29_780),
-                6.9634e8
+                6.9634e9,
+                Color.BLUE
         ));
     }
 
@@ -50,7 +53,7 @@ public class MainFrame {
 
         lastTime = System.nanoTime();
 
-        Timer timer = new Timer(16, e -> run());
+        Timer timer = new Timer(8, e -> run());
         timer.start();
     }
 

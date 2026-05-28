@@ -35,6 +35,19 @@ public class SpaceObject {
 
     }
 
+    public SpaceObject(SpaceObject spaceObject) {
+        this.name = spaceObject.name;
+        this.massless = spaceObject.massless;
+        this.mass = spaceObject.mass;
+        this.radius = spaceObject.radius;
+        this.color = spaceObject.color;
+
+        this.position = new Vector(spaceObject.position);
+        this.velocity = new Vector(spaceObject.velocity);
+
+        this.force = new Vector(spaceObject.force);
+    }
+
     public void update(double time){
         Vector acceleration = Vector.divide(force, mass);
 

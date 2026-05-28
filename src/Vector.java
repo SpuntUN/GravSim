@@ -10,6 +10,11 @@ public class Vector {
     public Vector() {
     }
 
+    public Vector(Vector vector){
+        this.x = vector.getX();
+        this.y = vector.getY();
+    }
+
     public static Vector add(Vector v1, Vector v2){
         return new Vector(v1.getX() + v2.getX(), v1.getY() + v2.getY());
     }
