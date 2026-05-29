@@ -1,3 +1,7 @@
+package Project.UI;
+
+import Project.Math.SpaceObject;
+
 import javax.swing.*;
 import java.awt.*;
 

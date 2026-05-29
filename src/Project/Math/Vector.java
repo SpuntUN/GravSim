@@ -1,3 +1,5 @@
+package Project.Math;
+
 public class Vector {
     private double x;
     private double y;

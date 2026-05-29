@@ -1,3 +1,9 @@
+package Project.UI;
+
+import Project.Math.Space;
+import Project.Math.SpaceObject;
+import Project.Math.Vector;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;

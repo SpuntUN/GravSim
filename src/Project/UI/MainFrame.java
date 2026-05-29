@@ -1,3 +1,10 @@
+package Project.UI;
+
+import Project.Math.Space;
+import Project.Math.SpaceObject;
+import Project.Math.Vector;
+import Project.UI.TimeManagerPackage.TimeManager;
+
 import javax.swing.*;
 import java.awt.*;
 

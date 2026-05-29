@@ -1,3 +1,5 @@
+package Project.Math;
+
 import java.awt.*;
 
 public class SpaceObject {

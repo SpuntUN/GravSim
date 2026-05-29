@@ -1,6 +1,8 @@
+package Project.UI.TimeManagerPackage;
+
 public class TimeManager {
-    private double simulatedTime;
     private double timeSinceStart;
+    private double simulatedTime;
 
     private double dt = 1.0/1.0;
     private double speed = 86400;
@@ -12,6 +14,9 @@ public class TimeManager {
         this.dt = dt;
         this.speed = speed;
         accumulator = 0;
+
+        timeSinceStart = 0;
+        simulatedTime = 0;
     }
 
     public TimeManager(){
@@ -23,6 +28,9 @@ public class TimeManager {
         lastTime = currentTime;
 
         accumulator += frameTime*speed;
+
+        timeSinceStart += frameTime;
+        simulatedTime += frameTime*speed;
     }
 
     public boolean hasAccumulated(){

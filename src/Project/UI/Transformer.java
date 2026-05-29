@@ -1,3 +1,8 @@
+package Project.UI;
+
+import Project.Math.SpaceObject;
+import Project.Math.Vector;
+
 public class Transformer {
     private double scale;
     private double scaleFactor;

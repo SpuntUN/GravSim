@@ -1,3 +1,5 @@
+package Project.Math;
+
 import java.util.ArrayList;
 
 public class Space {
