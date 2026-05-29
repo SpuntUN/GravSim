@@ -5,18 +5,15 @@ public class MainFrame {
 
     private JFrame frame;
     private Space space;
+    private TimeManager timeManager;
     private SpacePanel spacePanel;
     private SpaceObjectPanel spaceObjectPanel;
-
-    private double dt = 1.0/1.0;
-    private double speed = 864000;
-    private double accumulator = 0;
-    private long lastTime;
 
 
     public MainFrame() {
         frame = new JFrame("The Only Place that hasn't been Corrupted by CAPITALISM!");
         space = new Space();
+        timeManager = new TimeManager(1.0/1.0, 86400);
         spaceObjectPanel = new SpaceObjectPanel();
         spacePanel = new SpacePanel(space, spaceObjectPanel);
 
@@ -38,11 +35,21 @@ public class MainFrame {
                 5.972e24,
                 new Vector(1.496e11, 0),
                 new Vector(0, 29_780),
-                6.9634e9,
+                6.9634e8,
                 Color.BLUE
+        );
+        SpaceObject moon = new SpaceObject(
+                "Moon",
+                false,
+                7.349e22,
+                new Vector(1.49984e11, 0),
+                new Vector(0, 30_802),
+                1.737e8,
+                Color.GRAY
         );
         space.addSpaceObject(sun);
         space.addSpaceObject(earth);
+        space.addSpaceObject(moon);
         spaceObjectPanel.setSpaceObject(earth);
 
     }
@@ -61,22 +68,18 @@ public class MainFrame {
 
         this.frame.setVisible(true);
 
-        lastTime = System.nanoTime();
+        timeManager.setLastTime(System.nanoTime());
 
         Timer timer = new Timer(8, e -> run());
         timer.start();
     }
 
     private void run(){
-        long currentTime = System.nanoTime();
-        double frameTime = (currentTime-lastTime)/1_000_000_000.0;
-        lastTime = currentTime;
 
-        accumulator += frameTime*speed;
-
-        while (accumulator >= dt){
-            space.update(dt);
-            accumulator -= dt;
+        timeManager.accumulate(System.nanoTime());
+        while (timeManager.hasAccumulated()){
+            space.update(timeManager.getDt());
+            timeManager.reduceAccumulationByDt();
         }
 
         spaceObjectPanel.refresh();
