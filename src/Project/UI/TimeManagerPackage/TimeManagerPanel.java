@@ -8,23 +8,23 @@ import java.awt.event.ActionListener;
 
 public class TimeManagerPanel {
 
-    JPanel panel;
+    private JPanel panel;
 
-    JPanel infoPanel;
-    JPanel attributesPanel;
+    private JPanel infoPanel;
+    private JPanel attributesPanel;
 
-    TimeManager timeManager;
+    private TimeManager timeManager;
 
-    Font font;
+    private Font font;
 
-    JLabel timeSinceStartLabel;
-    JLabel simulatedTimeLabel;
+    private JLabel timeSinceStartLabel;
+    private JLabel simulatedTimeLabel;
 
-    JTextField dtField;
-    JTextField speedField;
+    private JTextField dtField;
+    private JTextField speedField;
 
-    JButton dtSetButton;
-    JButton speedSetButton;
+    private JButton dtSetButton;
+    private JButton speedSetButton;
 
     public TimeManagerPanel(TimeManager timeManager) {
         this.timeManager = timeManager;
@@ -50,15 +50,9 @@ public class TimeManagerPanel {
     }
 
     public void updateLabels() {
-        timeSinceStartLabel.setText(
-                "Time Since Start: " +
-                        timeManager.getTimeString(timeManager.getTimeSinceStart())
-        );
+        timeSinceStartLabel.setText("Time Since Start: " + timeManager.getTimeString(timeManager.getTimeSinceStart()));
 
-        simulatedTimeLabel.setText(
-                "Simulation Time: " +
-                        timeManager.getTimeString(timeManager.getSimulatedTime())
-        );
+        simulatedTimeLabel.setText("Simulation Time: " + timeManager.getTimeString(timeManager.getSimulatedTime()));
     }
 
     private void infoPanelInit() {
@@ -66,15 +60,9 @@ public class TimeManagerPanel {
         infoPanel.setLayout(new GridLayout(2, 1));
         infoPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        timeSinceStartLabel = new JLabel(
-                "Time Since Start: " +
-                        timeManager.getTimeString(timeManager.getTimeSinceStart())
-        );
+        timeSinceStartLabel = new JLabel("Time Since Start: " + timeManager.getTimeString(timeManager.getTimeSinceStart()));
 
-        simulatedTimeLabel = new JLabel(
-                "Simulation Time: " +
-                        timeManager.getTimeString(timeManager.getSimulatedTime())
-        );
+        simulatedTimeLabel = new JLabel("Simulation Time: " + timeManager.getTimeString(timeManager.getSimulatedTime()));
 
         timeSinceStartLabel.setFont(font);
         simulatedTimeLabel.setFont(font);

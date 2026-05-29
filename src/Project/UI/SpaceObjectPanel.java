@@ -11,6 +11,7 @@ public class SpaceObjectPanel {
     private Font font;
 
 
+
     public SpaceObjectPanel(){
         init();
     }
@@ -59,7 +60,7 @@ public class SpaceObjectPanel {
 
         c.gridx = 0;
         c.gridy = y;
-        c.gridwidth = 2;
+        c.gridwidth = 3;
         c.weighty = 1.0;
         panel.add(new JLabel(), c);
 
@@ -90,6 +91,8 @@ public class SpaceObjectPanel {
         c.fill = GridBagConstraints.HORIZONTAL;
         panel.add(l2, c);
     }
+
+
 
     public void refresh(){
         setSpaceObject(spaceObject);
