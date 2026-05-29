@@ -53,13 +53,48 @@ public class TimeManager {
         return timeSinceStart;
     }
 
+    public String getTimeString(double time){
+        double adjustedTime = time;
+
+        final double SECONDS = 60;
+        final double MINUTES = 60;
+        final double HOURS = 60 * MINUTES;
+        final double DAYS = 24 * HOURS;
+        final double MONTHS = 30 * DAYS;
+        final double YEARS = 12 * MONTHS;
+
+        if (time < SECONDS) {
+            adjustedTime = time;
+            return String.format("%.2f sec", adjustedTime);
+
+        } else if (time < MINUTES) {
+            adjustedTime = time/MINUTES;
+            return String.format("%.2f min", adjustedTime);
+
+        } else if (time < HOURS) {
+            adjustedTime = time/HOURS;
+            return String.format("%.2f hours", adjustedTime);
+
+        } else if (time < DAYS*MONTHS) {
+            adjustedTime = time/DAYS;
+            return String.format("%.2f days", adjustedTime);
+
+        } else{
+            adjustedTime = time/YEARS;
+            return String.format("%.2f years", adjustedTime);
+
+        }
+    }
+
     public void setTimeSinceStart(double timeSinceStart) {
         this.timeSinceStart = timeSinceStart;
     }
 
     public double getSimulatedTime() {
+        System.out.println(simulatedTime);
         return simulatedTime;
     }
+
 
     public void setSimulatedTime(double simulatedTime) {
         this.simulatedTime = simulatedTime;

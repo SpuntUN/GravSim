@@ -40,9 +40,9 @@ public class TimeManagerPanel {
         infoPanel.setLayout(new GridLayout(2, 1));
         infoPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        timeSinceStartLabel = new JLabel("Time Since Start: " + timeManager.getTimeSinceStart());
+        timeSinceStartLabel = new JLabel("Time Since Start: " + timeManager.getTimeString(timeManager.getTimeSinceStart()));
 
-        simulatedTimeLabel = new JLabel("Simulation Time: " + timeManager.getSimulatedTime());
+        simulatedTimeLabel = new JLabel("Simulation Time: " + timeManager.getTimeString(timeManager.getSimulatedTime()));
 
         timeSinceStartLabel.setFont(font);
         simulatedTimeLabel.setFont(font);
@@ -81,9 +81,9 @@ public class TimeManagerPanel {
     }
 
     public void updateLabels() {
-        timeSinceStartLabel.setText("Time Since Start: " + timeManager.getTimeSinceStart());
+        timeSinceStartLabel.setText("Time Since Start: " + timeManager.getTimeString(timeManager.getTimeSinceStart()));
 
-        simulatedTimeLabel.setText("Simulation Time: " + timeManager.getSimulatedTime());
+        simulatedTimeLabel.setText("Simulation Time: " + timeManager.getTimeString(timeManager.getSimulatedTime()));
 
         dtLabel.setText("Delta Time: " + timeManager.getDt());
 
