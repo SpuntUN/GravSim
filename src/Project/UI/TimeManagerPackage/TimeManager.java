@@ -81,7 +81,6 @@ public class TimeManager {
     }
 
     public double getSimulatedTime() {
-        System.out.println(simulatedTime);
         return simulatedTime;
     }
 

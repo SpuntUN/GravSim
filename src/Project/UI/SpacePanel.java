@@ -28,10 +28,8 @@ public class SpacePanel extends JPanel{
         super.paintComponent(g);
 
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setRenderingHint(
-                RenderingHints.KEY_ANTIALIASING,
-                RenderingHints.VALUE_ANTIALIAS_ON
-        );
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
 
         paintSpaceObjects(g2d);
     }
@@ -44,7 +42,15 @@ public class SpacePanel extends JPanel{
             double rad = transformedObject.getRadius();
 
             g2d.setColor(o.getColor());
-            g2d.fillOval((int)(pos.getX() - rad), (int)(pos.getY() - rad), (int)(rad * 2), (int)(rad * 2));
+            java.awt.geom.Ellipse2D.Double oval = new java.awt.geom.Ellipse2D.Double(
+                    pos.getX() - rad,
+                    pos.getY() - rad,
+                    rad * 2,
+                    rad * 2
+            );
+
+            // 3. Fill using the double-precision shape
+            g2d.fill(oval);
         }
     }
 

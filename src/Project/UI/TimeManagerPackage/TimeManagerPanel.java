@@ -3,6 +3,8 @@ package Project.UI.TimeManagerPackage;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class TimeManagerPanel {
 
@@ -18,8 +20,11 @@ public class TimeManagerPanel {
     JLabel timeSinceStartLabel;
     JLabel simulatedTimeLabel;
 
-    JLabel dtLabel;
-    JLabel speedLabel;
+    JTextField dtField;
+    JTextField speedField;
+
+    JButton dtSetButton;
+    JButton speedSetButton;
 
     public TimeManagerPanel(TimeManager timeManager) {
         this.timeManager = timeManager;
@@ -29,15 +34,12 @@ public class TimeManagerPanel {
     public void init() {
         panel = new JPanel();
         panel.setLayout(new BorderLayout());
+        panel.setBackground(Color.WHITE);
 
         font = new Font("Arial", Font.PLAIN, 20);
 
-        panel.setBackground(Color.WHITE);
-
-
         infoPanelInit();
         attributePanelInit();
-
 
         panel.add(infoPanel, BorderLayout.NORTH);
         panel.add(attributesPanel, BorderLayout.SOUTH);
@@ -48,23 +50,31 @@ public class TimeManagerPanel {
     }
 
     public void updateLabels() {
-        timeSinceStartLabel.setText("Time Since Start: " + timeManager.getTimeString(timeManager.getTimeSinceStart()));
+        timeSinceStartLabel.setText(
+                "Time Since Start: " +
+                        timeManager.getTimeString(timeManager.getTimeSinceStart())
+        );
 
-        simulatedTimeLabel.setText("Simulation Time: " + timeManager.getTimeString(timeManager.getSimulatedTime()));
-
-        dtLabel.setText("Delta Time: " + timeManager.getDt());
-
-        speedLabel.setText("Simulation Speed: " + timeManager.getSpeed());
+        simulatedTimeLabel.setText(
+                "Simulation Time: " +
+                        timeManager.getTimeString(timeManager.getSimulatedTime())
+        );
     }
 
-    private void infoPanelInit(){
+    private void infoPanelInit() {
         infoPanel = new JPanel();
         infoPanel.setLayout(new GridLayout(2, 1));
         infoPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        timeSinceStartLabel = new JLabel("Time Since Start: " + timeManager.getTimeString(timeManager.getTimeSinceStart()));
+        timeSinceStartLabel = new JLabel(
+                "Time Since Start: " +
+                        timeManager.getTimeString(timeManager.getTimeSinceStart())
+        );
 
-        simulatedTimeLabel = new JLabel("Simulation Time: " + timeManager.getTimeString(timeManager.getSimulatedTime()));
+        simulatedTimeLabel = new JLabel(
+                "Simulation Time: " +
+                        timeManager.getTimeString(timeManager.getSimulatedTime())
+        );
 
         timeSinceStartLabel.setFont(font);
         simulatedTimeLabel.setFont(font);
@@ -73,20 +83,57 @@ public class TimeManagerPanel {
         infoPanel.add(simulatedTimeLabel);
     }
 
-    public void attributePanelInit(){
+    public void attributePanelInit() {
         attributesPanel = new JPanel();
-        attributesPanel.setLayout(new GridLayout(2, 1));
+        attributesPanel.setLayout(new GridLayout(2, 3));
         attributesPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        dtLabel = new JLabel("Delta Time: " + timeManager.getDt());
+        JLabel dtLabel = new JLabel("Delta Time:");
+        JLabel speedLabel = new JLabel("Speed:");
 
-        speedLabel = new JLabel("Simulation Speed: " + timeManager.getSpeed());
+        dtField = new JTextField(String.valueOf(timeManager.getDt()));
+        speedField = new JTextField(String.valueOf(timeManager.getSpeed()));
+
+        dtSetButton = new JButton("Set");
+        speedSetButton = new JButton("Set");
 
         dtLabel.setFont(font);
         speedLabel.setFont(font);
+        dtField.setFont(font);
+        speedField.setFont(font);
+        dtSetButton.setFont(font);
+        speedSetButton.setFont(font);
+
+        dtSetButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    double value = Double.parseDouble(dtField.getText());
+                    timeManager.setDt(value);
+                } catch (NumberFormatException ex) {
+                    dtField.setText(String.valueOf(timeManager.getDt()));
+                }
+            }
+        });
+
+        speedSetButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    double value = Double.parseDouble(speedField.getText());
+                    timeManager.setSpeed(value);
+                } catch (NumberFormatException ex) {
+                    speedField.setText(String.valueOf(timeManager.getSpeed()));
+                }
+            }
+        });
 
         attributesPanel.add(dtLabel);
-        attributesPanel.add(speedLabel);
-    }
+        attributesPanel.add(dtField);
+        attributesPanel.add(dtSetButton);
 
+        attributesPanel.add(speedLabel);
+        attributesPanel.add(speedField);
+        attributesPanel.add(speedSetButton);
+    }
 }
