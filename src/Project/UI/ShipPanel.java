@@ -16,4 +16,8 @@ public class ShipPanel {
 
         this.panel.setBackground(Color.WHITE);
     }
+
+    public JPanel getRoot(){
+        return panel;
+    }
 }

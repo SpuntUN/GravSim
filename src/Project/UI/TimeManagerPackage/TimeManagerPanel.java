@@ -34,37 +34,9 @@ public class TimeManagerPanel {
 
         panel.setBackground(Color.WHITE);
 
-        // TOP PANEL
 
-        infoPanel = new JPanel();
-        infoPanel.setLayout(new GridLayout(2, 1));
-        infoPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-
-        timeSinceStartLabel = new JLabel("Time Since Start: " + timeManager.getTimeString(timeManager.getTimeSinceStart()));
-
-        simulatedTimeLabel = new JLabel("Simulation Time: " + timeManager.getTimeString(timeManager.getSimulatedTime()));
-
-        timeSinceStartLabel.setFont(font);
-        simulatedTimeLabel.setFont(font);
-
-        infoPanel.add(timeSinceStartLabel);
-        infoPanel.add(simulatedTimeLabel);
-
-        // BOTTOM PANEL
-
-        attributesPanel = new JPanel();
-        attributesPanel.setLayout(new GridLayout(2, 1));
-        attributesPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-
-        dtLabel = new JLabel("Delta Time: " + timeManager.getDt());
-
-        speedLabel = new JLabel("Simulation Speed: " + timeManager.getSpeed());
-
-        dtLabel.setFont(font);
-        speedLabel.setFont(font);
-
-        attributesPanel.add(dtLabel);
-        attributesPanel.add(speedLabel);
+        infoPanelInit();
+        attributePanelInit();
 
 
         panel.add(infoPanel, BorderLayout.NORTH);
@@ -84,4 +56,37 @@ public class TimeManagerPanel {
 
         speedLabel.setText("Simulation Speed: " + timeManager.getSpeed());
     }
+
+    private void infoPanelInit(){
+        infoPanel = new JPanel();
+        infoPanel.setLayout(new GridLayout(2, 1));
+        infoPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+        timeSinceStartLabel = new JLabel("Time Since Start: " + timeManager.getTimeString(timeManager.getTimeSinceStart()));
+
+        simulatedTimeLabel = new JLabel("Simulation Time: " + timeManager.getTimeString(timeManager.getSimulatedTime()));
+
+        timeSinceStartLabel.setFont(font);
+        simulatedTimeLabel.setFont(font);
+
+        infoPanel.add(timeSinceStartLabel);
+        infoPanel.add(simulatedTimeLabel);
+    }
+
+    public void attributePanelInit(){
+        attributesPanel = new JPanel();
+        attributesPanel.setLayout(new GridLayout(2, 1));
+        attributesPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+        dtLabel = new JLabel("Delta Time: " + timeManager.getDt());
+
+        speedLabel = new JLabel("Simulation Speed: " + timeManager.getSpeed());
+
+        dtLabel.setFont(font);
+        speedLabel.setFont(font);
+
+        attributesPanel.add(dtLabel);
+        attributesPanel.add(speedLabel);
+    }
+
 }

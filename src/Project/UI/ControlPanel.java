@@ -10,9 +10,11 @@ import java.sql.Time;
 public class ControlPanel {
     private JPanel panel;
     private TimeManagerPanel timeManagerPanel;
+    private ShipPanel shipPanel;
 
     public ControlPanel(TimeManager timeManager){
         timeManagerPanel = new TimeManagerPanel(timeManager);
+        shipPanel = new ShipPanel();
         init();
     }
 
@@ -22,6 +24,7 @@ public class ControlPanel {
         panel.setLayout(new BorderLayout());
 
         panel.add(timeManagerPanel.getRoot(), BorderLayout.WEST);
+        panel.add(shipPanel.getRoot(), BorderLayout.EAST);
 
 
         panel.setBackground(Color.WHITE);
