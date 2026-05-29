@@ -17,7 +17,6 @@ public class MainFrame {
     private SpaceObjectPanel spaceObjectPanel;
     private ControlPanel controlPanel;
     private TimeManager timeManager;
-    private TimeManagerPanel timeManagerPanel;
 
 
     public MainFrame() {
@@ -25,9 +24,8 @@ public class MainFrame {
         space = new Space();
         spaceObjectPanel = new SpaceObjectPanel();
         spacePanel = new SpacePanel(space, spaceObjectPanel);
-        timeManager = new TimeManager(1.0/1.0, 86400);
-        timeManagerPanel = new TimeManagerPanel(timeManager);
-        controlPanel = new ControlPanel(timeManagerPanel);
+        timeManager = new TimeManager(1.0/1.0, 864000);
+        controlPanel = new ControlPanel(timeManager);
 
 
         //BULLSHIT TE$STING
@@ -96,7 +94,7 @@ public class MainFrame {
         }
 
         spaceObjectPanel.refresh();
-        timeManagerPanel.updateLabels();
+        controlPanel.updateComponents();
         spacePanel.repaint();
     }
 

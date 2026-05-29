@@ -53,36 +53,26 @@ public class TimeManager {
         return timeSinceStart;
     }
 
-    public String getTimeString(double time){
-        double adjustedTime = time;
+    public String getTimeString(double time) {
+        final double SECONDS_PER_MIN = 60;
+        final double SECONDS_PER_HOUR = 60 * SECONDS_PER_MIN;
+        final double SECONDS_PER_DAY = 24 * SECONDS_PER_HOUR;
+        final double SECONDS_PER_YEAR = 365 * SECONDS_PER_DAY;
 
-        final double SECONDS = 60;
-        final double MINUTES = 60;
-        final double HOURS = 60 * MINUTES;
-        final double DAYS = 24 * HOURS;
-        final double MONTHS = 30 * DAYS;
-        final double YEARS = 12 * MONTHS;
+        if (time < SECONDS_PER_MIN) {
+            return String.format("%.2f sec", time);
 
-        if (time < SECONDS) {
-            adjustedTime = time;
-            return String.format("%.2f sec", adjustedTime);
+        } else if (time < SECONDS_PER_HOUR) {
+            return String.format("%.2f min", time / SECONDS_PER_MIN);
 
-        } else if (time < MINUTES) {
-            adjustedTime = time/MINUTES;
-            return String.format("%.2f min", adjustedTime);
+        } else if (time < SECONDS_PER_DAY) {
+            return String.format("%.2f hours", time / SECONDS_PER_HOUR);
 
-        } else if (time < HOURS) {
-            adjustedTime = time/HOURS;
-            return String.format("%.2f hours", adjustedTime);
+        } else if (time < SECONDS_PER_YEAR) {
+            return String.format("%.2f days", time / SECONDS_PER_DAY);
 
-        } else if (time < DAYS*MONTHS) {
-            adjustedTime = time/DAYS;
-            return String.format("%.2f days", adjustedTime);
-
-        } else{
-            adjustedTime = time/YEARS;
-            return String.format("%.2f years", adjustedTime);
-
+        } else {
+            return String.format("%.2f years", time / SECONDS_PER_YEAR);
         }
     }
 

@@ -8,11 +8,11 @@ import java.awt.*;
 import java.sql.Time;
 
 public class ControlPanel {
-    JPanel panel;
-    TimeManagerPanel timeManagerPanel;
+    private JPanel panel;
+    private TimeManagerPanel timeManagerPanel;
 
-    public ControlPanel(TimeManagerPanel timeManagerPanel){
-        this.timeManagerPanel = timeManagerPanel;
+    public ControlPanel(TimeManager timeManager){
+        timeManagerPanel = new TimeManagerPanel(timeManager);
         init();
     }
 
@@ -25,6 +25,10 @@ public class ControlPanel {
 
 
         panel.setBackground(Color.WHITE);
+    }
+
+    public void updateComponents(){
+        timeManagerPanel.updateLabels();
     }
 
     public JPanel getRoot(){

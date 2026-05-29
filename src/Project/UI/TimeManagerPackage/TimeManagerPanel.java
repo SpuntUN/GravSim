@@ -50,9 +50,7 @@ public class TimeManagerPanel {
         infoPanel.add(timeSinceStartLabel);
         infoPanel.add(simulatedTimeLabel);
 
-        //---------------------------------
         // BOTTOM PANEL
-        //---------------------------------
 
         attributesPanel = new JPanel();
         attributesPanel.setLayout(new GridLayout(2, 1));
@@ -68,9 +66,6 @@ public class TimeManagerPanel {
         attributesPanel.add(dtLabel);
         attributesPanel.add(speedLabel);
 
-        //---------------------------------
-        // ADD TO MAIN PANEL
-        //---------------------------------
 
         panel.add(infoPanel, BorderLayout.NORTH);
         panel.add(attributesPanel, BorderLayout.SOUTH);

@@ -205,6 +205,20 @@ public class SpaceObject {
         return radius;
     }
 
+    public String getRadiusString() {
+        double radius = getRadius();
+        final double KM_THRESHOLD = 1e3;
+        final double AU_THRESHOLD = 1.496e11;
+
+        if (radius >= AU_THRESHOLD / 10.0) {
+            return String.format("%.4f AU", radius / AU_THRESHOLD);
+        } else if (radius >= KM_THRESHOLD) {
+            return String.format("%.4f km", radius / KM_THRESHOLD);
+        } else {
+            return String.format("%.4f m", radius);
+        }
+    }
+
     public void setRadius(double radius) {
         this.radius = radius;
     }

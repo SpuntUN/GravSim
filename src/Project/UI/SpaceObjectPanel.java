@@ -55,8 +55,7 @@ public class SpaceObjectPanel {
         addRow("Position:", String.valueOf(spaceObject.getPositionString()), y++, c);
         addRow("Speed:", String.valueOf(spaceObject.getSpeedString()), y++, c);
         addRow("Velocity:", String.valueOf(spaceObject.getVelocityString()), y++, c);
-        addRow("Force:", String.valueOf(spaceObject.getForce()), y++, c);
-        addRow("Radius:", String.valueOf(spaceObject.getRadius()), y++, c);
+        addRow("Radius:", String.valueOf(spaceObject.getRadiusString()), y++, c);
 
         c.gridx = 0;
         c.gridy = y;
