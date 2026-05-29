@@ -49,4 +49,31 @@ public class TimeManager {
         this.lastTime = lastTime;
     }
 
+    public double getTimeSinceStart() {
+        return timeSinceStart;
+    }
+
+    public void setTimeSinceStart(double timeSinceStart) {
+        this.timeSinceStart = timeSinceStart;
+    }
+
+    public double getSimulatedTime() {
+        return simulatedTime;
+    }
+
+    public void setSimulatedTime(double simulatedTime) {
+        this.simulatedTime = simulatedTime;
+    }
+
+    public void setDt(double dt) {
+        this.dt = dt;
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(double speed) {
+        this.speed = speed;
+    }
 }

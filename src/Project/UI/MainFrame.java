@@ -4,6 +4,7 @@ import Project.Math.Space;
 import Project.Math.SpaceObject;
 import Project.Math.Vector;
 import Project.UI.TimeManagerPackage.TimeManager;
+import Project.UI.TimeManagerPackage.TimeManagerPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,17 +13,19 @@ public class MainFrame {
 
     private JFrame frame;
     private Space space;
-    private TimeManager timeManager;
     private SpacePanel spacePanel;
     private SpaceObjectPanel spaceObjectPanel;
+    private TimeManager timeManager;
+    private TimeManagerPanel timeManagerPanel;
 
 
     public MainFrame() {
         frame = new JFrame("The Only Place that hasn't been Corrupted by CAPITALISM!");
         space = new Space();
-        timeManager = new TimeManager(1.0/1.0, 86400);
         spaceObjectPanel = new SpaceObjectPanel();
         spacePanel = new SpacePanel(space, spaceObjectPanel);
+        timeManager = new TimeManager(1.0/1.0, 86400);
+        timeManagerPanel = new TimeManagerPanel(timeManager);
 
 
         //BULLSHIT TE$STING
@@ -70,6 +73,7 @@ public class MainFrame {
 
         this.frame.add(spacePanel, BorderLayout.CENTER);
         this.frame.add(spaceObjectPanel.getRoot(), BorderLayout.WEST);
+        this.frame.add(timeManagerPanel.getRoot(), BorderLayout.SOUTH);
 
 
 
@@ -90,6 +94,7 @@ public class MainFrame {
         }
 
         spaceObjectPanel.refresh();
+        timeManagerPanel.updateLabels();
         spacePanel.repaint();
     }
 

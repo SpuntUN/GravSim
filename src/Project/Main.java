@@ -1,6 +1,5 @@
-package Project.MainPackage;
+package Project;
 
-import Project.Math.SpaceObject;
 import Project.UI.MainFrame;
 
 public class Main {
