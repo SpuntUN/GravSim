@@ -15,6 +15,7 @@ public class MainFrame {
     private Space space;
     private SpacePanel spacePanel;
     private SpaceObjectPanel spaceObjectPanel;
+    private ControlPanel controlPanel;
     private TimeManager timeManager;
     private TimeManagerPanel timeManagerPanel;
 
@@ -26,6 +27,7 @@ public class MainFrame {
         spacePanel = new SpacePanel(space, spaceObjectPanel);
         timeManager = new TimeManager(1.0/1.0, 86400);
         timeManagerPanel = new TimeManagerPanel(timeManager);
+        controlPanel = new ControlPanel(timeManagerPanel);
 
 
         //BULLSHIT TE$STING
@@ -73,7 +75,7 @@ public class MainFrame {
 
         this.frame.add(spacePanel, BorderLayout.CENTER);
         this.frame.add(spaceObjectPanel.getRoot(), BorderLayout.WEST);
-        this.frame.add(timeManagerPanel.getRoot(), BorderLayout.SOUTH);
+        this.frame.add(controlPanel.getRoot(), BorderLayout.SOUTH);
 
 
 

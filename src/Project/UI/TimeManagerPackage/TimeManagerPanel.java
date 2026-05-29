@@ -27,7 +27,6 @@ public class TimeManagerPanel {
     }
 
     public void init() {
-
         panel = new JPanel();
         panel.setLayout(new BorderLayout());
 
