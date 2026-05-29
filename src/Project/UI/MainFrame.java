@@ -39,7 +39,7 @@ public class MainFrame {
                 1.98847e30,
                 new Vector(0, 0),
                 new Vector(0, 0),
-                6.9634e9,
+                6.957e8,
                 Color.YELLOW
 
         );
@@ -49,7 +49,7 @@ public class MainFrame {
                 5.972e24,
                 new Vector(1.496e11, 0),
                 new Vector(0, 29_780),
-                6.9634e8,
+                6.371e6,
                 Color.BLUE
         );
         SpaceObject moon = new SpaceObject(
@@ -58,7 +58,7 @@ public class MainFrame {
                 7.349e22,
                 new Vector(1.49984e11, 0),
                 new Vector(0, 30_802),
-                1.737e8,
+                1.737e6,
                 Color.GRAY
         );
         space.addSpaceObject(sun);

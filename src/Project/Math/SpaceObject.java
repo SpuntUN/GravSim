@@ -12,6 +12,7 @@ public class SpaceObject {
 
     private Color color;
     private double radius;
+    private int minimalScreenRadius;
 
     public SpaceObject(String name, boolean massless, double mass, Vector position, Vector velocity, double radius) {
         this.name = name;
@@ -22,7 +23,19 @@ public class SpaceObject {
         this.radius = radius;
         this.force = new Vector(0, 0);
         color = Color.WHITE;
+        minimalScreenRadius = 3;
+    }
 
+    public SpaceObject(String name, boolean massless, double mass, Vector position, Vector velocity, double radius, int minimalScreenRadius) {
+        this.name = name;
+        this.massless = massless;
+        this.mass = mass;
+        this.position = position;
+        this.velocity = velocity;
+        this.radius = radius;
+        this.force = new Vector(0, 0);
+        color = Color.WHITE;
+        this.minimalScreenRadius = minimalScreenRadius;
     }
 
     public SpaceObject(String name, boolean massless, double mass, Vector position, Vector velocity, double radius, Color color) {
@@ -34,7 +47,7 @@ public class SpaceObject {
         this.radius = radius;
         this.force = new Vector(0, 0);
         this.color = color;
-
+        minimalScreenRadius = 3;
     }
 
     public SpaceObject(SpaceObject spaceObject) {
@@ -42,6 +55,7 @@ public class SpaceObject {
         this.massless = spaceObject.massless;
         this.mass = spaceObject.mass;
         this.radius = spaceObject.radius;
+        this.minimalScreenRadius = spaceObject.minimalScreenRadius;
         this.color = spaceObject.color;
 
         this.position = new Vector(spaceObject.position);
@@ -229,5 +243,13 @@ public class SpaceObject {
 
     public void addForce(Vector force) {
         this.force = Vector.add(this.force, force);
+    }
+
+    public int getMinimalScreenRadius() {
+        return minimalScreenRadius;
+    }
+
+    public void setMinimalScreenRadius(int minimalScreenRadius) {
+        this.minimalScreenRadius = minimalScreenRadius;
     }
 }

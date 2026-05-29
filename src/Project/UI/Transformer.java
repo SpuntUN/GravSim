@@ -36,6 +36,10 @@ public class Transformer {
         pos = Vector.add(pos, offset);
         rad /= scale;
 
+        if (rad < spaceObject.getMinimalScreenRadius()){
+            rad = spaceObject.getMinimalScreenRadius();
+        }
+
 
         transformedObject.setPosition(pos);
         transformedObject.setRadius(rad);
