@@ -12,9 +12,9 @@ public class ControlPanel {
     private TimeManagerPanel timeManagerPanel;
     private ShipPanel shipPanel;
 
-    public ControlPanel(TimeManager timeManager){
-        timeManagerPanel = new TimeManagerPanel(timeManager);
-        shipPanel = new ShipPanel();
+    public ControlPanel(TimeManagerPanel timeManagerPanel, ShipPanel shipPanel){
+        this.timeManagerPanel = timeManagerPanel;
+        this.shipPanel = shipPanel;
         init();
     }
 

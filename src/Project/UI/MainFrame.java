@@ -17,6 +17,8 @@ public class MainFrame {
     private SpaceObjectPanel spaceObjectPanel;
     private ControlPanel controlPanel;
     private TimeManager timeManager;
+    private TimeManagerPanel timeManagerPanel;
+    private ShipPanel shipPanel;
 
 
     public MainFrame() {
@@ -24,8 +26,10 @@ public class MainFrame {
         space = new Space();
         spaceObjectPanel = new SpaceObjectPanel();
         spacePanel = new SpacePanel(space, spaceObjectPanel);
-        timeManager = new TimeManager(1.0/1.0, 864000);
-        controlPanel = new ControlPanel(timeManager);
+        timeManager = new TimeManager(1.0/1.0, 86400);
+        timeManagerPanel = new TimeManagerPanel(timeManager);
+        shipPanel = new ShipPanel();
+        controlPanel = new ControlPanel(timeManagerPanel, shipPanel);
 
 
         //BULLSHIT TE$STING
@@ -71,9 +75,12 @@ public class MainFrame {
         this.frame.setLocationRelativeTo(null);
         this.frame.setResizable(false);
 
+        matchPanelWidth(spaceObjectPanel.getRoot(), timeManagerPanel.getRoot());
+
         this.frame.add(spacePanel, BorderLayout.CENTER);
         this.frame.add(spaceObjectPanel.getRoot(), BorderLayout.WEST);
         this.frame.add(controlPanel.getRoot(), BorderLayout.SOUTH);
+
 
 
 
@@ -94,8 +101,18 @@ public class MainFrame {
         }
 
         spaceObjectPanel.refresh();
-        controlPanel.updateComponents();
+        timeManagerPanel.updateLabels();
         spacePanel.repaint();
     }
+
+    private void matchPanelWidth(JPanel source, JPanel target) {
+        int width = source.getPreferredSize().width;
+
+        Dimension targetPreferred = target.getPreferredSize();
+        target.setPreferredSize(new Dimension(width, targetPreferred.height));
+        target.setMinimumSize(new Dimension(width, targetPreferred.height));
+        target.setMaximumSize(new Dimension(width, Integer.MAX_VALUE));
+    }
+
 
 }

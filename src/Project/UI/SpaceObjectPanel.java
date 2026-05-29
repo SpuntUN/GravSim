@@ -76,7 +76,6 @@ public class SpaceObjectPanel {
         JLabel l2 = new JLabel(value);
         l2.setFont(font);
 
-        // force wrapping / width control
         l2.setMaximumSize(new Dimension(300, Integer.MAX_VALUE));
         l2.setPreferredSize(new Dimension(300, l2.getPreferredSize().height));
 
