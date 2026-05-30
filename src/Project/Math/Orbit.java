@@ -8,6 +8,8 @@ public class Orbit {
     private int maxTrail;
     private Color color;
 
+    private int counter = 0;
+
 
     public Orbit(int maxTrail) {
         positions = new LinkedList<>();
@@ -23,6 +25,10 @@ public class Orbit {
 
 
     public void addPosition(Vector pos){
+        counter++;
+        if (counter < 50) return;
+        counter = 0;
+
         if (positions.size()+1 > maxTrail){
             positions.removeFirst();
         }

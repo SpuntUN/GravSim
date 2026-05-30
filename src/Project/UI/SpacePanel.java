@@ -126,17 +126,25 @@ public class SpacePanel extends JPanel{
 
     private void paintOrbit(Graphics2D g2d, SpaceObject spaceObject){
         LinkedList<Vector> positions = spaceObject.getOrbit().getPositions();
-        g2d.setColor(spaceObject.getOrbit().getColor());
-        g2d.setStroke(new BasicStroke(spaceObject.getMinimalScreenRadius()));
+        Color color = spaceObject.getColor();
 
-        for (int i = 0; i < positions.size() - 10; i += 10) {
+        g2d.setStroke(new BasicStroke(
+                spaceObject.getMinimalScreenRadius(),
+                BasicStroke.CAP_BUTT,
+                BasicStroke.JOIN_ROUND
+        ));
+
+        for (int i = 0; i < positions.size() - 1; i++) {
             Vector current = positions.get(i);
-            Vector next = positions.get(i + 10);
+            Vector next = positions.get(i + 1);
 
             java.awt.geom.Line2D.Double line = new java.awt.geom.Line2D.Double(
                     current.getX(), current.getY(),
                     next.getX(), next.getY()
             );
+
+            int alpha =(int) (255.0 * i / (positions.size() - 1));
+            g2d.setColor(new Color(color.getRed(), color.getGreen(), color.getBlue(), alpha));
             g2d.draw(line);
         }
     }

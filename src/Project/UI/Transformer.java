@@ -54,7 +54,7 @@ public class Transformer {
         transformedObject.setPosition(pos);
         transformedObject.setRadius(rad);
 
-        if (spaceObject.equals(followedObject)){
+        if (!spaceObject.equals(followedObject)){
             transformedObject.getOrbit().setPositions(new LinkedList<>());
         }else{
             transformedObject.setOrbit(transformOrbit(transformedObject.getOrbit()));

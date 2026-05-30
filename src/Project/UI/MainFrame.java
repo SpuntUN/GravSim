@@ -41,7 +41,7 @@ public class MainFrame {
                 false,
                 5.972e24,
                 new Vector(1.521e11, 0),
-                new Vector(0, 29_290),
+                new Vector(0, 29_29),
                 6.371e6,
                 Color.BLUE
         );
