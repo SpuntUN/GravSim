@@ -36,6 +36,7 @@ public class Transformer {
 
         if (followedObject != null){
             pos = Vector.subtract(pos, followedObject.getPosition());
+            pos = Vector.add(pos, startingFollowingPosition);
         }
 
         pos = Vector.divide(pos, scale);
@@ -103,8 +104,13 @@ public class Transformer {
     }
 
     public void setCenteredObject(SpaceObject followedObject){
+        if (startingFollowingPosition != null){
+            startingFollowingPosition = Vector.add(Vector.subtract(startingFollowingPosition,this.followedObject.getPosition()), followedObject.getPosition())  ;
+        } else {
+            startingFollowingPosition = followedObject.getPosition();
+        }
+
         this.followedObject = followedObject;
-        startingFollowingPosition = followedObject.getPosition();
     }
 
 }
