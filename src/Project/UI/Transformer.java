@@ -7,6 +7,8 @@ public class Transformer {
     private double scale;
     private double scaleFactor;
     private Vector offset;
+    private SpaceObject followedObject;
+    private Vector startingFollowingPosition;
 
     public Transformer(double scale, Vector offset){
         this.scale = scale;
@@ -31,6 +33,10 @@ public class Transformer {
 
         Vector pos = transformedObject.getPosition();
         double rad = transformedObject.getRadius();
+
+        if (followedObject != null){
+            pos = Vector.subtract(pos, followedObject.getPosition());
+        }
 
         pos = Vector.divide(pos, scale);
         pos = Vector.add(pos, offset);
@@ -94,6 +100,11 @@ public class Transformer {
         Vector world = Vector.multiply(Vector.subtract(mouse, offset), oldScale);
 
         offset = Vector.subtract(mouse, Vector.divide(world, scale));
+    }
+
+    public void setCenteredObject(SpaceObject followedObject){
+        this.followedObject = followedObject;
+        startingFollowingPosition = followedObject.getPosition();
     }
 
 }

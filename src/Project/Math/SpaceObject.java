@@ -64,6 +64,18 @@ public class SpaceObject {
         this.force = new Vector(spaceObject.force);
     }
 
+    public SpaceObject(){
+        this.name = null;
+        this.massless = true;
+        this.mass = 0;
+        this.position = new Vector(0, 0);
+        this.velocity = new Vector(0, 0);
+        this.radius = 0;
+        this.force = new Vector(0, 0);
+        color = Color.WHITE;
+        this.minimalScreenRadius = 0;
+    }
+
     public void update(double time){
         Vector acceleration = Vector.divide(force, mass);
 
@@ -98,11 +110,11 @@ public class SpaceObject {
         final double EARTH_MASS = 5.972e24;
         final double SOLAR_MASS = 1.98847e30;
 
-        if (mass >= SOLAR_MASS/10) {
+        if (mass >= SOLAR_MASS/100) {
             double solar = mass / SOLAR_MASS;
             return String.format("%.4f Msun", solar);
 
-        } else if (mass >= EARTH_MASS/10) {
+        } else if (mass >= EARTH_MASS/100) {
             double earth = mass / EARTH_MASS;
             return String.format("%.4f Mearth", earth);
 

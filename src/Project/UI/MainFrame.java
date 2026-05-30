@@ -47,8 +47,8 @@ public class MainFrame {
                 "Earth",
                 false,
                 5.972e24,
-                new Vector(1.496e11, 0),
-                new Vector(0, 29_780),
+                new Vector(1.521e11, 0),
+                new Vector(0, 29_290),
                 6.371e6,
                 Color.BLUE
         );
@@ -56,15 +56,14 @@ public class MainFrame {
                 "Moon",
                 false,
                 7.349e22,
-                new Vector(1.49984e11, 0),
-                new Vector(0, 30_802),
+                new Vector(1.5251e11, 0),
+                new Vector(0, 30_254),
                 1.737e6,
                 Color.GRAY
         );
         space.addSpaceObject(sun);
         space.addSpaceObject(earth);
         space.addSpaceObject(moon);
-        spaceObjectPanel.setSpaceObject(earth);
 
     }
 
@@ -75,7 +74,9 @@ public class MainFrame {
         this.frame.setLocationRelativeTo(null);
         this.frame.setResizable(false);
 
+        spaceObjectPanel.setSpaceObject(new SpaceObject());
         matchPanelWidth(spaceObjectPanel.getRoot(), timeManagerPanel.getRoot());
+        spaceObjectPanel.setSpaceObject(null);
 
         this.frame.add(spacePanel, BorderLayout.CENTER);
         this.frame.add(spaceObjectPanel.getRoot(), BorderLayout.WEST);

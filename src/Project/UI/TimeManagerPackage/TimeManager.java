@@ -68,7 +68,7 @@ public class TimeManager {
         } else if (time < SECONDS_PER_DAY) {
             return String.format("%.2f hours", time / SECONDS_PER_HOUR);
 
-        } else if (time < SECONDS_PER_YEAR) {
+        } else if (time < SECONDS_PER_YEAR*2) {
             return String.format("%.2f days", time / SECONDS_PER_DAY);
 
         } else {

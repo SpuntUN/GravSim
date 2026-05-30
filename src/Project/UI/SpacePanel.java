@@ -73,8 +73,10 @@ public class SpacePanel extends JPanel{
             @Override
             public void mousePressed(MouseEvent e) {
                 Vector mousePos = new Vector(e.getX(), e.getY());
-                if (spaceObjectPressed(mousePos) != null){
-                    spaceObjectPanel.setSpaceObject(spaceObjectPressed(mousePos));
+                SpaceObject pressed = spaceObjectPressed(mousePos);
+                if (pressed != null){
+                    spaceObjectPanel.setSpaceObject(pressed);
+                    transformer.setCenteredObject(pressed);
                 }
                 pressedPos = mousePos;
             }
