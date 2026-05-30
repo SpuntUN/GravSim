@@ -24,13 +24,6 @@ public class MainFrame {
     public MainFrame() {
         frame = new JFrame("The Only Place that hasn't been Corrupted by CAPITALISM!");
         space = new Space();
-        spaceObjectPanel = new SpaceObjectPanel();
-        spacePanel = new SpacePanel(space, spaceObjectPanel);
-        timeManager = new TimeManager(1.0/1.0, 86400);
-        timeManagerPanel = new TimeManagerPanel(timeManager);
-        shipPanel = new ShipPanel();
-        controlPanel = new ControlPanel(timeManagerPanel, shipPanel);
-
 
         //BULLSHIT TE$STING
         SpaceObject sun = new SpaceObject(
@@ -64,6 +57,16 @@ public class MainFrame {
         space.addSpaceObject(sun);
         space.addSpaceObject(earth);
         space.addSpaceObject(moon);
+
+        spaceObjectPanel = new SpaceObjectPanel();
+        spacePanel = new SpacePanel(space, spaceObjectPanel);
+        timeManager = new TimeManager(1.0/1.0, 86400);
+        timeManagerPanel = new TimeManagerPanel(timeManager);
+        shipPanel = new ShipPanel();
+        controlPanel = new ControlPanel(timeManagerPanel, shipPanel);
+
+
+
 
     }
 

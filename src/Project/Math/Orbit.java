@@ -1,19 +1,35 @@
 package Project.Math;
 
+import java.awt.*;
 import java.util.LinkedList;
-import java.util.Vector;
 
 public class Orbit {
     private LinkedList<Vector> positions;
     private int maxTrail;
+    private Color color;
+
 
     public Orbit(int maxTrail) {
+        positions = new LinkedList<>();
         this.maxTrail = maxTrail;
+        color = Color.GRAY;
     }
 
+    public Orbit(Orbit orbit){
+        this.positions = orbit.getPositions();
+        this.maxTrail = orbit.getMaxTrail();
+        this.color = orbit.getColor();
+    }
+
+
     public void addPosition(Vector pos){
+        if (positions.size()+1 > maxTrail){
+            positions.removeFirst();
+        }
         positions.add(pos);
     }
+
+
 
     public LinkedList<Vector> getPositions() {
         return positions;
@@ -23,11 +39,20 @@ public class Orbit {
         this.positions = positions;
     }
 
+
     public int getMaxTrail() {
         return maxTrail;
     }
 
     public void setMaxTrail(int maxTrail) {
         this.maxTrail = maxTrail;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 }

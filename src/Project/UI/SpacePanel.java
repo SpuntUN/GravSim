@@ -1,5 +1,6 @@
 package Project.UI;
 
+import Project.Math.Orbit;
 import Project.Math.Space;
 import Project.Math.SpaceObject;
 import Project.Math.Vector;
@@ -8,6 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class SpacePanel extends JPanel{
     private Space space;
@@ -30,16 +33,19 @@ public class SpacePanel extends JPanel{
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
+        g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
 
-        paintSpaceObjects(g2d);
+        for (SpaceObject o : space.getSpaceObjects()){
+            SpaceObject transformedObject = transformer.TransformNewSpaceObject(o);
+            paintOrbit(g2d, transformedObject);
+            paintSpaceObject(g2d , transformedObject);
+        }
+
     }
 
-    private void paintSpaceObjects(Graphics2D g2d){
-        for (SpaceObject o : space.getSpaceObjects()){
-
-            SpaceObject transformedObject = transformer.TransformNewSpaceObject(o);
-            Vector pos = transformedObject.getPosition();
-            double rad = transformedObject.getRadius();
+    private void paintSpaceObject(Graphics2D g2d, SpaceObject o){
+            Vector pos = o.getPosition();
+            double rad = o.getRadius();
 
             g2d.setColor(o.getColor());
             java.awt.geom.Ellipse2D.Double oval = new java.awt.geom.Ellipse2D.Double(
@@ -49,9 +55,7 @@ public class SpacePanel extends JPanel{
                     rad * 2
             );
 
-            // 3. Fill using the double-precision shape
             g2d.fill(oval);
-        }
     }
 
 
@@ -118,6 +122,23 @@ public class SpacePanel extends JPanel{
             }
         }
         return null;
+    }
+
+    private void paintOrbit(Graphics2D g2d, SpaceObject spaceObject){
+        LinkedList<Vector> positions = spaceObject.getOrbit().getPositions();
+        g2d.setColor(spaceObject.getOrbit().getColor());
+        g2d.setStroke(new BasicStroke(spaceObject.getMinimalScreenRadius()));
+
+        for (int i = 0; i < positions.size() - 10; i += 10) {
+            Vector current = positions.get(i);
+            Vector next = positions.get(i + 10);
+
+            java.awt.geom.Line2D.Double line = new java.awt.geom.Line2D.Double(
+                    current.getX(), current.getY(),
+                    next.getX(), next.getY()
+            );
+            g2d.draw(line);
+        }
     }
 
 }

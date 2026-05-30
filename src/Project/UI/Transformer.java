@@ -1,7 +1,10 @@
 package Project.UI;
 
+import Project.Math.Orbit;
 import Project.Math.SpaceObject;
 import Project.Math.Vector;
+
+import java.util.LinkedList;
 
 public class Transformer {
     private double scale;
@@ -9,6 +12,7 @@ public class Transformer {
     private Vector offset;
     private SpaceObject followedObject;
     private Vector startingFollowingPosition;
+
 
     public Transformer(double scale, Vector offset){
         this.scale = scale;
@@ -47,9 +51,15 @@ public class Transformer {
             rad = spaceObject.getMinimalScreenRadius();
         }
 
-
         transformedObject.setPosition(pos);
         transformedObject.setRadius(rad);
+
+        if (spaceObject.equals(followedObject)){
+            transformedObject.getOrbit().setPositions(new LinkedList<>());
+        }else{
+            transformedObject.setOrbit(transformOrbit(transformedObject.getOrbit()));
+        }
+
 
         return transformedObject;
     }
@@ -101,6 +111,24 @@ public class Transformer {
         Vector world = Vector.multiply(Vector.subtract(mouse, offset), oldScale);
 
         offset = Vector.subtract(mouse, Vector.divide(world, scale));
+    }
+
+    private Orbit transformOrbit(Orbit orbit){
+        Orbit transformed = new Orbit(orbit);
+        transformed.setPositions(new LinkedList<>());
+        for (Vector pos : orbit.getPositions()){
+
+            if (followedObject != null){
+                pos = Vector.subtract(pos, followedObject.getPosition());
+                pos = Vector.add(pos, startingFollowingPosition);
+            }
+
+            pos = Vector.divide(pos, scale);
+            pos = Vector.add(pos, offset);
+
+            transformed.addPosition(pos);
+        }
+        return transformed;
     }
 
     public void setCenteredObject(SpaceObject followedObject){

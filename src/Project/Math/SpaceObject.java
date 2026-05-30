@@ -14,6 +14,8 @@ public class SpaceObject {
     private double radius;
     private int minimalScreenRadius;
 
+    private Orbit orbit;
+
     public SpaceObject(String name, boolean massless, double mass, Vector position, Vector velocity, double radius) {
         this.name = name;
         this.massless = massless;
@@ -24,6 +26,7 @@ public class SpaceObject {
         this.force = new Vector(0, 0);
         color = Color.WHITE;
         minimalScreenRadius = 3;
+        orbit = new Orbit(10000);
     }
 
     public SpaceObject(String name, boolean massless, double mass, Vector position, Vector velocity, double radius, int minimalScreenRadius) {
@@ -36,6 +39,7 @@ public class SpaceObject {
         this.force = new Vector(0, 0);
         color = Color.WHITE;
         this.minimalScreenRadius = minimalScreenRadius;
+        orbit = new Orbit(10000);
     }
 
     public SpaceObject(String name, boolean massless, double mass, Vector position, Vector velocity, double radius, Color color) {
@@ -48,6 +52,7 @@ public class SpaceObject {
         this.force = new Vector(0, 0);
         this.color = color;
         minimalScreenRadius = 3;
+        orbit = new Orbit(10000);
     }
 
     public SpaceObject(SpaceObject spaceObject) {
@@ -62,6 +67,7 @@ public class SpaceObject {
         this.velocity = new Vector(spaceObject.velocity);
 
         this.force = new Vector(spaceObject.force);
+        this.orbit = new Orbit(spaceObject.orbit);
     }
 
     public SpaceObject(){
@@ -74,6 +80,7 @@ public class SpaceObject {
         this.force = new Vector(0, 0);
         color = Color.WHITE;
         this.minimalScreenRadius = 0;
+        orbit = new Orbit(0);
     }
 
     public void update(double time){
@@ -81,6 +88,8 @@ public class SpaceObject {
 
         velocity = Vector.add(velocity, Vector.multiply(acceleration, time));
         position = Vector.add(position, Vector.multiply(velocity, time));
+
+        orbit.addPosition(position);
     }
 
 
@@ -263,5 +272,13 @@ public class SpaceObject {
 
     public void setMinimalScreenRadius(int minimalScreenRadius) {
         this.minimalScreenRadius = minimalScreenRadius;
+    }
+
+    public Orbit getOrbit() {
+        return orbit;
+    }
+
+    public void setOrbit(Orbit orbit) {
+        this.orbit = orbit;
     }
 }
