@@ -6,9 +6,9 @@ import java.util.LinkedList;
 public class Orbit {
     private LinkedList<Vector> positions;
     private int maxTrail;
+    private int counter = 0;
     private Color color;
 
-    private int counter = 0;
 
 
     public Orbit(int maxTrail) {
@@ -60,5 +60,13 @@ public class Orbit {
 
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
     }
 }

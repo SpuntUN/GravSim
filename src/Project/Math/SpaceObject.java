@@ -26,7 +26,7 @@ public class SpaceObject {
         this.force = new Vector(0, 0);
         color = Color.WHITE;
         minimalScreenRadius = 3;
-        orbit = new Orbit(10000);
+        orbit = new Orbit(100000);
     }
 
     public SpaceObject(String name, boolean massless, double mass, Vector position, Vector velocity, double radius, int minimalScreenRadius) {
@@ -39,7 +39,7 @@ public class SpaceObject {
         this.force = new Vector(0, 0);
         color = Color.WHITE;
         this.minimalScreenRadius = minimalScreenRadius;
-        orbit = new Orbit(10000);
+        orbit = new Orbit(100000);
     }
 
     public SpaceObject(String name, boolean massless, double mass, Vector position, Vector velocity, double radius, Color color) {
@@ -52,7 +52,7 @@ public class SpaceObject {
         this.force = new Vector(0, 0);
         this.color = color;
         minimalScreenRadius = 3;
-        orbit = new Orbit(10000);
+        orbit = new Orbit(100000);
     }
 
     public SpaceObject(SpaceObject spaceObject) {

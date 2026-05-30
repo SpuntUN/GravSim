@@ -36,12 +36,21 @@ public class MainFrame {
                 Color.YELLOW
 
         );
+        SpaceObject mercury = new SpaceObject(
+                "Mercury",
+                false,
+                3.3011e23,
+                new Vector(5.791e10, 0),
+                new Vector(0, 47_360),
+                2.4397e6,
+                Color.ORANGE
+        );
         SpaceObject earth = new SpaceObject(
                 "Earth",
                 false,
                 5.972e24,
                 new Vector(1.521e11, 0),
-                new Vector(0, 29_29),
+                new Vector(0, 19_290),
                 6.371e6,
                 Color.BLUE
         );
@@ -55,6 +64,7 @@ public class MainFrame {
                 Color.GRAY
         );
         space.addSpaceObject(sun);
+        space.addSpaceObject(mercury);
         space.addSpaceObject(earth);
         space.addSpaceObject(moon);
 
