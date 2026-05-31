@@ -3,18 +3,18 @@ package Project.Math;
 import java.awt.*;
 
 public class SpaceObject {
-    private String name;
-    private boolean massless;
-    private double mass;
-    private Vector position;
-    private Vector velocity;
-    private Vector force;
+    protected String name;
+    protected boolean massless;
+    protected double mass;
+    protected Vector position;
+    protected Vector velocity;
+    protected Vector force;
 
-    private Color color;
-    private double radius;
-    private int minimalScreenRadius;
+    protected Color color;
+    protected double radius;
+    protected int minimalScreenRadius;
 
-    private Orbit orbit;
+    protected Orbit orbit;
 
     public SpaceObject(String name, boolean massless, double mass, Vector position, Vector velocity, double radius) {
         this.name = name;
@@ -25,7 +25,7 @@ public class SpaceObject {
         this.radius = radius;
         this.force = new Vector(0, 0);
         color = Color.WHITE;
-        minimalScreenRadius = 3;
+        minimalScreenRadius = 4;
         orbit = new Orbit(100000);
     }
 
@@ -51,7 +51,7 @@ public class SpaceObject {
         this.radius = radius;
         this.force = new Vector(0, 0);
         this.color = color;
-        minimalScreenRadius = 3;
+        minimalScreenRadius = 4;
         orbit = new Orbit(100000);
     }
 
@@ -80,7 +80,6 @@ public class SpaceObject {
         this.force = new Vector(0, 0);
         color = Color.WHITE;
         this.minimalScreenRadius = 0;
-        orbit = new Orbit(0);
     }
 
     public void update(double time){

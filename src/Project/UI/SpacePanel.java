@@ -35,6 +35,7 @@ public class SpacePanel extends JPanel{
         g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
         g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
 
+
         for (SpaceObject o : space.getSpaceObjects()){
             SpaceObject transformedObject = transformer.TransformNewSpaceObject(o);
             paintOrbit(g2d, transformedObject);
@@ -129,7 +130,7 @@ public class SpacePanel extends JPanel{
         Color color = spaceObject.getColor();
 
         g2d.setStroke(new BasicStroke(
-                spaceObject.getMinimalScreenRadius(),
+                spaceObject.getMinimalScreenRadius()/2,
                 BasicStroke.CAP_BUTT,
                 BasicStroke.JOIN_ROUND
         ));
