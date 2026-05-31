@@ -234,7 +234,7 @@ public class SpaceObject {
         final double KM_THRESHOLD = 1e3;
         final double AU_THRESHOLD = 1.496e11;
 
-        if (radius >= AU_THRESHOLD / 10.0) {
+        if (radius >= AU_THRESHOLD / 1000.0) {
             return String.format("%.4f AU", radius / AU_THRESHOLD);
         } else if (radius >= KM_THRESHOLD) {
             return String.format("%.4f km", radius / KM_THRESHOLD);
@@ -272,4 +272,9 @@ public class SpaceObject {
     }
 
 
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

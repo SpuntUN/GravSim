@@ -41,9 +41,15 @@ public class InstructionPanelManager {
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
 
+        // 1. Build the input card first
+        addInputCard();
+
+        // 2. Pin the input card permanently to the left, and list to the center
+        root.add(inputCard, BorderLayout.WEST);
         root.add(scrollPane, BorderLayout.CENTER);
 
-        addInputCard();
+        // Initial population of instructions
+        refreshUI();
     }
 
     private void addInputCard() {
@@ -91,7 +97,7 @@ public class InstructionPanelManager {
         inputCard.add(new JLabel(""));
         inputCard.add(add);
 
-        listPanel.add(inputCard);
+        // REMOVED: listPanel.add(inputCard); -> Managed by init() now
     }
 
     private void createInstruction() {
@@ -139,13 +145,14 @@ public class InstructionPanelManager {
     }
 
     public void refreshUI() {
+        // Now this only clears the instructions, leaving the input card completely safe!
         listPanel.removeAll();
 
         for (Instruction instruction : spaceCraft.getInstructions()) {
             addInstructionCard(instruction);
         }
 
-        listPanel.add(inputCard);
+        // REMOVED: listPanel.add(inputCard);
 
         listPanel.revalidate();
         listPanel.repaint();

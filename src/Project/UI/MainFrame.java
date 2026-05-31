@@ -67,7 +67,7 @@ public class MainFrame {
                 new Vector(0, earth.getVelocity().getY() + 7660),
                 Color.WHITE,
                 100,
-                10_000_000,
+                1_000_000,
                 100_000.0
                 );
 
@@ -84,7 +84,7 @@ public class MainFrame {
 
         //BULLSHIT TESTING END
 
-        spaceObjectPanel = new SpaceObjectPanel();
+        spaceObjectPanel = new SpaceObjectPanel(space);
         spacePanel = new SpacePanel(space, spaceObjectPanel);
         timeManager = new TimeManager(1.0/100.0, 0);
         timeManagerPanel = new TimeManagerPanel(timeManager);
