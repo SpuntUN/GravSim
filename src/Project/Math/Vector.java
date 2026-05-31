@@ -58,6 +58,15 @@ public class Vector {
         return new Vector(-v.getX(), -v.getY());
     }
 
+    public static Vector polarToCartesianConversion(double magnitude, double angle){
+        angle = angle % 360;
+
+        double x = magnitude * Math.cos(angle);
+        double y = magnitude * Math.sin(angle);
+
+        return new Vector(x, y);
+    }
+
     public double getX() {
         return x;
     }
