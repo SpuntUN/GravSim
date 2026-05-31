@@ -116,6 +116,10 @@ public class Transformer {
         transformed.setPositions(new LinkedList<>());
         for (Vector pos : orbit.getPositions()){
 
+            if (orbit.getRelativeTo() != null){
+                pos = Vector.add(pos, orbit.getRelativeTo().getPosition());
+            }
+
             if (followedObject != null){
                 pos = Vector.subtract(pos, followedObject.getPosition());
                 pos = Vector.add(pos, startingFollowingPosition);

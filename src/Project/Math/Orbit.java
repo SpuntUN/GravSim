@@ -7,20 +7,20 @@ public class Orbit {
     private LinkedList<Vector> positions;
     private int maxTrail;
     private int counter = 0;
-    private Color color;
 
+    private SpaceObject relativeTo;
 
 
     public Orbit(int maxTrail) {
         positions = new LinkedList<>();
         this.maxTrail = maxTrail;
-        color = Color.GRAY;
     }
 
     public Orbit(Orbit orbit){
         this.positions = orbit.getPositions();
         this.maxTrail = orbit.getMaxTrail();
-        this.color = orbit.getColor();
+        this.counter = orbit.getCounter();
+        this.relativeTo = orbit.getRelativeTo();
     }
 
 
@@ -54,13 +54,6 @@ public class Orbit {
         this.maxTrail = maxTrail;
     }
 
-    public Color getColor() {
-        return color;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
-    }
 
     public int getCounter() {
         return counter;
@@ -68,5 +61,13 @@ public class Orbit {
 
     public void setCounter(int counter) {
         this.counter = counter;
+    }
+
+    public SpaceObject getRelativeTo() {
+        return relativeTo;
+    }
+
+    public void setRelativeTo(SpaceObject relativeTo) {
+        this.relativeTo = relativeTo;
     }
 }

@@ -126,6 +126,7 @@ public class SpacePanel extends JPanel{
     }
 
     private void paintOrbit(Graphics2D g2d, SpaceObject spaceObject){
+        Orbit orbit = spaceObject.getOrbit();
         LinkedList<Vector> positions = spaceObject.getOrbit().getPositions();
         Color color = spaceObject.getColor();
 

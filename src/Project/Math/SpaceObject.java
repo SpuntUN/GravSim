@@ -16,30 +16,16 @@ public class SpaceObject {
 
     protected Orbit orbit;
 
-    public SpaceObject(String name, boolean massless, double mass, Vector position, Vector velocity, double radius) {
+    public SpaceObject(String name, double mass, Vector position, Vector velocity, Color color, double radius) {
         this.name = name;
-        this.massless = massless;
         this.mass = mass;
         this.position = position;
         this.velocity = velocity;
+        this.color = color;
         this.radius = radius;
         this.force = new Vector(0, 0);
-        color = Color.WHITE;
         minimalScreenRadius = 4;
-        orbit = new Orbit(100000);
-    }
-
-    public SpaceObject(String name, boolean massless, double mass, Vector position, Vector velocity, double radius, int minimalScreenRadius) {
-        this.name = name;
-        this.massless = massless;
-        this.mass = mass;
-        this.position = position;
-        this.velocity = velocity;
-        this.radius = radius;
-        this.force = new Vector(0, 0);
-        color = Color.WHITE;
-        this.minimalScreenRadius = minimalScreenRadius;
-        orbit = new Orbit(100000);
+        orbit = new Orbit(30000);
     }
 
     public SpaceObject(String name, boolean massless, double mass, Vector position, Vector velocity, double radius, Color color) {
@@ -52,7 +38,7 @@ public class SpaceObject {
         this.force = new Vector(0, 0);
         this.color = color;
         minimalScreenRadius = 4;
-        orbit = new Orbit(100000);
+        orbit = new Orbit(50000);
     }
 
     public SpaceObject(SpaceObject spaceObject) {
@@ -88,7 +74,11 @@ public class SpaceObject {
         velocity = Vector.add(velocity, Vector.multiply(acceleration, time));
         position = Vector.add(position, Vector.multiply(velocity, time));
 
-        orbit.addPosition(position);
+        if (orbit.getRelativeTo() != null){
+            orbit.addPosition(Vector.subtract(position, orbit.getRelativeTo().getPosition()));
+        } else{
+            orbit.addPosition(position);
+        }
     }
 
 

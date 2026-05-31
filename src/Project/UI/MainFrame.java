@@ -1,8 +1,6 @@
 package Project.UI;
 
-import Project.Math.Space;
-import Project.Math.SpaceObject;
-import Project.Math.Vector;
+import Project.Math.*;
 import Project.UI.TimeManagerPackage.TimeManager;
 import Project.UI.TimeManagerPackage.TimeManagerPanel;
 
@@ -25,7 +23,7 @@ public class MainFrame {
         frame = new JFrame("The Only Place that hasn't been Corrupted by CAPITALISM!");
         space = new Space();
 
-        //BULLSHIT TE$STING
+        //BULLSHIT TE$STING START
         SpaceObject sun = new SpaceObject(
                 "Sun",
                 false,
@@ -63,19 +61,35 @@ public class MainFrame {
                 1.737e6,
                 Color.GRAY
         );
+        SpaceCraft ISS = new SpaceCraft(
+                "ISS",
+                50_000,
+                new Vector(Vector.add(Vector.add(earth.getPosition(), earth.getRadius()), 400000)),
+                new Vector(0, 36_950),
+                Color.WHITE,
+                100,
+                100_000,
+                100
+                );
+
         space.addSpaceObject(sun);
         space.addSpaceObject(mercury);
         space.addSpaceObject(earth);
         space.addSpaceObject(moon);
+        moon.getOrbit().setRelativeTo(earth);
+        space.addSpaceObject(ISS);
+        ISS.getOrbit().setRelativeTo(earth);
+        ISS.addInstruction(new Instruction());
+
+
+        //BULLSHIT TESTING END
 
         spaceObjectPanel = new SpaceObjectPanel();
         spacePanel = new SpacePanel(space, spaceObjectPanel);
-        timeManager = new TimeManager(1.0/1.0, 86400);
+        timeManager = new TimeManager(1.0/100.0, 60);
         timeManagerPanel = new TimeManagerPanel(timeManager);
         shipPanel = new ShipPanel();
         controlPanel = new ControlPanel(timeManagerPanel, shipPanel);
-
-
 
 
     }
