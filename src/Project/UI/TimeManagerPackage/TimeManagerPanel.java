@@ -76,8 +76,8 @@ public class TimeManagerPanel {
         attributesPanel.setLayout(new GridLayout(2, 3));
         attributesPanel.setBorder(new EmptyBorder(40, 10, 10, 10));
 
-        JLabel dtLabel = new JLabel("Delta Time:");
-        JLabel speedLabel = new JLabel("Speed:");
+        JLabel dtLabel = new JLabel("Sim. Freq.:");
+        JLabel speedLabel = new JLabel("Sim. Speed:");
 
         dtField = new JTextField(String.valueOf(timeManager.getDt()));
         speedField = new JTextField(String.valueOf(timeManager.getSpeed()));

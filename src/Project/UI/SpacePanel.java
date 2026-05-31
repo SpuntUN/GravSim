@@ -21,7 +21,7 @@ public class SpacePanel extends JPanel{
     public SpacePanel(Space space, SpaceObjectPanel spaceObjectPanel) {
         this.space = space;
         this.spaceObjectPanel = spaceObjectPanel;
-        transformer = new Transformer(1e9);
+        transformer = new Transformer(1e9, new Vector(1920/2.0, 1080/2.0));
         pressedPos = new Vector();
         init();
     }

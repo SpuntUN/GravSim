@@ -42,8 +42,6 @@ public class MainFrame {
 
         space.addSpaceObject(ISS);
         ISS.getOrbit().setRelativeTo(earth);
-        ISS.addInstruction(new Instruction(100_000,0, 2.0, 100.0));
-        ISS.addInstruction(new Instruction(100_000,90, 3600, 1000.0));
 
 
         spaceObjectPanel = new SpaceObjectPanel(space);
@@ -60,7 +58,7 @@ public class MainFrame {
         this.frame.setLayout(new BorderLayout());
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setLocationRelativeTo(null);
-        this.frame.setResizable(false);
+        this.frame.setResizable(true);
 
         spaceObjectPanel.setSpaceObject(new SpaceObject());
         matchPanelWidth(spaceObjectPanel.getRoot(), timeManagerPanel.getRoot());

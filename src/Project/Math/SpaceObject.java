@@ -2,6 +2,10 @@ package Project.Math;
 
 import java.awt.*;
 
+/**
+ *
+ */
+
 public class SpaceObject {
     protected String name;
     protected boolean massless;
