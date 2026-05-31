@@ -1,5 +1,8 @@
 package Project.Math;
 
+/**
+ *
+ */
 public class Instruction {
     private double thrust;
     public double direction;

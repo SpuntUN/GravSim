@@ -4,16 +4,19 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class SpaceCraft extends SpaceObject{
+/**
+ * Represents a controllable spacecraft that extends {@link SpaceObject}.
+ * It tracks fuel consumption, custom instructions (maneuvers), and handles thrust application.
+ * * @author Matěj Švec
+ */
+public class SpaceCraft extends SpaceObject {
     private double fuel;
     private double maxFuel;
     private double thrust;
     private final double fuelEfficiency = 0.01;
     private double thrustDirection;
     private double maxThrust;
-
     private ArrayList<Instruction> instructions;
-
 
     public SpaceCraft(String name, double mass, Vector position, Vector velocity, Color color, double radius, double fuel, double maxThrust) {
         super(name, mass, position, velocity, color, radius);
@@ -24,6 +27,12 @@ public class SpaceCraft extends SpaceObject{
         instructions = new ArrayList<>();
     }
 
+    /**
+     * Executes engine burn sequences, shortens requested thrust to maxThrust,
+     * consumes corresponding fuel, and adds the resulting force vector to the craft.
+     *
+     * @param time time delta
+     */
     public void burn(double time){
         if (thrust > maxThrust) thrust = maxThrust;
 
@@ -32,16 +41,32 @@ public class SpaceCraft extends SpaceObject{
         addForce(Vector.polarToCartesianConversion(thrust, thrustDirection));
     }
 
+    /**
+     * Decrements fuel reserves based on thrust intensity, duration, and efficiency.
+     * Important to say, this is not realistic consumption of fuel for a space craft.
+     * @param thrustTime total thrust accumulated during the time frame
+     */
     private void consumeFuel(double thrustTime){
         double consumedFuel = thrustTime * fuelEfficiency;
         fuel -= consumedFuel;
     }
 
+    /**
+     * Checks if the vehicle has depleted its fuel reserves.
+     *
+     * @return true if fuel is less than or equal to 0, false otherwise
+     */
     public boolean outOfFuel(){
         return fuel <= 0;
     }
 
-
+    /**
+     * Updates the spacecraft state over an incremental step. Processes active instructions,
+     * updates engine configurations, and processes structural physics updates.
+     * If the craft runs out of fuel, pending instructions are cleared.
+     *
+     * @param time elapsed time step delta
+     */
     @Override
     public void update(double time){
         if (outOfFuel()) instructions = new ArrayList<>();
@@ -68,47 +93,102 @@ public class SpaceCraft extends SpaceObject{
         super.update(time);
     }
 
-
+    /**
+     * Appends a planned instruction to the spacecraft's trajectory queue.
+     *
+     * @param instruction the instruction to add
+     */
     public void addInstruction(Instruction instruction){
         instructions.add(instruction);
     }
 
+    /**
+     * Removes an instruction from the spacecraft's trajectory queue.
+     *
+     * @param instruction the instruction to remove
+     */
     public void removeInstruction(Instruction instruction){
         instructions.remove(instruction);
     }
 
+    /**
+     * Returns the complete queue of execution instructions.
+     *
+     * @return list of instructions
+     */
     public ArrayList<Instruction> getInstructions() {
         return instructions;
     }
 
+    /**
+     * Gets the current amount of remaining fuel.
+     *
+     * @return fuel remaining
+     */
     public double getFuel() {
         return fuel;
     }
 
+    /**
+     * Direct setting of the current fuel value.
+     *
+     * @param fuel new fuel value
+     */
     public void setFuel(double fuel) {
         this.fuel = fuel;
     }
 
+    /**
+     * Gets the maximum capacity threshold of fuel.
+     *
+     * @return max capacity
+     */
     public double getMaxFuel() {
         return maxFuel;
     }
 
+    /**
+     * Sets the maximum capacity threshold of fuel.
+     *
+     * @param maxFuel new max fuel value
+     */
     public void setMaxFuel(double maxFuel) {
         this.maxFuel = maxFuel;
     }
 
+    /**
+     * Gets maximum structural engine capability.
+     *
+     * @return max thrust value
+     */
     public double getMaxThrust() {
         return maxThrust;
     }
 
+    /**
+     * Sets maximum structural engine capability limit.
+     *
+     * @param maxThrust new max thrust limit
+     */
     public void setMaxThrust(double maxThrust) {
         this.maxThrust = maxThrust;
     }
 
+    /**
+     * Assigns a fresh instruction list to the vessel, wiping previous items.
+     *
+     * @param instructions custom list of instructions
+     */
     public void setInstructions(ArrayList<Instruction> instructions) {
         this.instructions = instructions;
     }
 
+    /**
+     * Generates a readable string of the current fuel formatted using liters (L),
+     * kiloliters (kL), or megaliters (ML) based on magnitude.
+     *
+     * @return formatted fuel string
+     */
     public String getFuelString() {
         double currentFuel = getFuel();
         final double KL_THRESHOLD = 1e3;
@@ -123,6 +203,12 @@ public class SpaceCraft extends SpaceObject{
         }
     }
 
+    /**
+     * Generates a readable string of the maximum fuel capacity formatted with
+     * appropriate volumetric unit prefixes (L, kL, ML).
+     *
+     * @return formatted max fuel string
+     */
     public String getMaxFuelString() {
         double totalFuel = getMaxFuel();
         final double KL_THRESHOLD = 1e3;
@@ -137,6 +223,12 @@ public class SpaceCraft extends SpaceObject{
         }
     }
 
+    /**
+     * Generates a human-readable string representation of the maximum engine thrust capability,
+     * scaled into Newtons (N), kilonewtons (kN), or meganewtons (MN).
+     *
+     * @return formatted max thrust string
+     */
     public String getMaxThrustString() {
         double thrustVal = getMaxThrust();
         final double KN_THRESHOLD = 1e3;
@@ -150,5 +242,4 @@ public class SpaceCraft extends SpaceObject{
             return String.format("%.2f N", thrustVal);
         }
     }
-
 }

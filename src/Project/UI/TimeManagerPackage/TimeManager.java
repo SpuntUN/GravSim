@@ -25,6 +25,7 @@ public class TimeManager {
 
     public void accumulate(long currentTime){
         frameTime = (currentTime-lastTime)/1_000_000_000.0;
+        if (frameTime > 1) speed = 0;
         lastTime = currentTime;
 
         accumulator += frameTime*speed;

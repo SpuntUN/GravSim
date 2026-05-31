@@ -271,6 +271,18 @@ public class SpaceObject {
         this.orbit = orbit;
     }
 
+    public static SpaceObject fromCsv(String[] f) {
+        return new SpaceObject(
+                f[0],
+                Boolean.parseBoolean(f[1]),
+                Double.parseDouble(f[2]),
+                new Vector(Double.parseDouble(f[3]), Double.parseDouble(f[4])),
+                new Vector(Double.parseDouble(f[5]), Double.parseDouble(f[6])),
+                Double.parseDouble(f[7]),
+                Color.decode(f[8])
+        );
+    }
+
 
 
     @Override

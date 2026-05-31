@@ -6,6 +6,7 @@ import Project.UI.TimeManagerPackage.TimeManagerPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.*;
 
 public class MainFrame {
 
@@ -22,44 +23,12 @@ public class MainFrame {
         frame = new JFrame("The Only Place that hasn't been Corrupted by CAPITALISM!");
         space = new Space();
 
-        //BULLSHIT TE$STING START
-        SpaceObject sun = new SpaceObject(
-                "Sun",
-                false,
-                1.98847e30,
-                new Vector(0, 0),
-                new Vector(0, 0),
-                6.957e8,
-                Color.YELLOW
+        loadPlanetsFromCsv(space, "res/planets.csv");
 
-        );
-        SpaceObject mercury = new SpaceObject(
-                "Mercury",
-                false,
-                3.3011e23,
-                new Vector(5.791e10, 0),
-                new Vector(0, 47_360),
-                2.4397e6,
-                Color.ORANGE
-        );
-        SpaceObject earth = new SpaceObject(
-                "Earth",
-                false,
-                5.972e24,
-                new Vector(1.521e11, 0),
-                new Vector(0, 29_290),
-                6.371e6,
-                Color.BLUE
-        );
-        SpaceObject moon = new SpaceObject(
-                "Moon",
-                false,
-                7.349e22,
-                new Vector(1.5251e11, 0),
-                new Vector(0, 30_254),
-                1.737e6,
-                Color.GRAY
-        );
+        SpaceObject earth = space.getSpaceObject("earth");
+        SpaceObject moon = space.getSpaceObject("moon");
+        moon.getOrbit().setRelativeTo(earth);
+
         SpaceCraft ISS = new SpaceCraft(
                 "ISS",
                 5_000,
@@ -69,20 +38,13 @@ public class MainFrame {
                 100,
                 1_000_000,
                 100_000.0
-                );
+        );
 
-        space.addSpaceObject(sun);
-        space.addSpaceObject(mercury);
-        space.addSpaceObject(earth);
-        space.addSpaceObject(moon);
-        moon.getOrbit().setRelativeTo(earth);
         space.addSpaceObject(ISS);
         ISS.getOrbit().setRelativeTo(earth);
         ISS.addInstruction(new Instruction(100_000,0, 2.0, 100.0));
         ISS.addInstruction(new Instruction(100_000,90, 3600, 1000.0));
 
-
-        //BULLSHIT TESTING END
 
         spaceObjectPanel = new SpaceObjectPanel(space);
         spacePanel = new SpacePanel(space, spaceObjectPanel);
@@ -143,4 +105,19 @@ public class MainFrame {
     }
 
 
+
+    private void loadPlanetsFromCsv(Space space, String path) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
+            reader.readLine(); // Header
+            String line;
+            while ((line = reader.readLine()) != null) {
+                line = line.strip();
+                if (!line.isEmpty()) {
+                    space.addSpaceObject(SpaceObject.fromCsv(line.split(",")));
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error during planet loading: " + e.getMessage());
+        }
+    }
 }

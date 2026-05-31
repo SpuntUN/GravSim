@@ -1,0 +1,7 @@
+name,static,mass,position_x,position_y,velocity_x,velocity_y,radius,color
+Sun,false,1.98847e30,0,0,0,0,6.957e8,#fff312
+Mercury,false,3.3011e23,5.791e10,0,0,47360,2.4397e6,#ff5512
+Earth,false,5.972e24,1.521e11,0,0,29290,6.371e6,#4059ff
+Moon,false,7.349e22,1.5251e11,0,0,30254,1.737e6,#8a8a8a
+Mars,false,6.4171e23,2.4923e11,0,0,21970,3.3895e6,#e27b58
+Jupiter,false,1.8982e27,8.1662e11,0,0,12440,6.9911e7,#b07f35

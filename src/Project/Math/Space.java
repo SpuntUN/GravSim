@@ -62,6 +62,11 @@ public class Space {
         return spaceObjects;
     }
 
-
+    public SpaceObject getSpaceObject(String name) {
+        for (SpaceObject obj : spaceObjects) {
+            if (obj.name.equalsIgnoreCase(name)) return obj;
+        }
+        return null;
+    }
 
 }
