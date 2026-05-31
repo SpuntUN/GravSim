@@ -2,10 +2,12 @@ package Project.Math;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class SpaceCraft extends SpaceObject{
     private double fuel;
     private double thrust;
+    private final double fuelEfficiency = 0.01;
     private double thrustDirection;
     private double maxThrust;
 
@@ -23,14 +25,13 @@ public class SpaceCraft extends SpaceObject{
     public void burn(double time){
         if (thrust > maxThrust) thrust = maxThrust;
 
-        double thrustTime = thrust*time;
-        consumeFuel(thrustTime);
+        consumeFuel(thrust * time);
 
-        addForce(Vector.polarToCartesianConversion(thrustTime, thrustDirection));
+        addForce(Vector.polarToCartesianConversion(thrust, thrustDirection));
     }
 
-    private void consumeFuel(double thrust){
-        double consumedFuel = thrust * mass;
+    private void consumeFuel(double thrustTime){
+        double consumedFuel = thrustTime * fuelEfficiency;
         fuel -= consumedFuel;
     }
 
@@ -41,22 +42,25 @@ public class SpaceCraft extends SpaceObject{
 
     @Override
     public void update(double time){
+        System.out.println(fuel);
 
         if (outOfFuel()) instructions = new ArrayList<>();
 
-        for (Instruction i : instructions){
+        Iterator<Instruction> iterator = instructions.iterator();
+        while (iterator.hasNext()) {
+            Instruction i = iterator.next();
 
             if (i.done()) {
-                instructions.remove(i);
-                continue;
-            }
-            if (!i.isActive()) {
+                iterator.remove();
                 continue;
             }
 
-            thrust = i.getThrust();
-            thrustDirection = i.getDirection();
-
+            if (i.isActive()) {
+                thrust = i.getThrust();
+                thrustDirection = i.getDirection();
+            } else {
+                thrust = 0;
+            }
             burn(time);
             i.update(time);
         }

@@ -37,7 +37,6 @@ public class SpacePanel extends JPanel{
 
 
         for (SpaceObject o : space.getSpaceObjects()){
-            System.out.println(o.getName());
             SpaceObject transformedObject = transformer.TransformNewSpaceObject(o);
             paintOrbit(g2d, transformedObject);
             paintSpaceObject(g2d , transformedObject);

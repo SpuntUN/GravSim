@@ -63,13 +63,13 @@ public class MainFrame {
         );
         SpaceCraft ISS = new SpaceCraft(
                 "ISS",
-                50_000,
+                5_000,
                 new Vector(new Vector(earth.getPosition().getX() + earth.getRadius() + 400000, 0)),
-                new Vector(0, 36_950),
+                new Vector(0, earth.getVelocity().getY() + 7660),
                 Color.WHITE,
                 100,
-                100_000,
-                100
+                10_000_000,
+                100_000.0
                 );
 
         space.addSpaceObject(sun);
@@ -79,7 +79,7 @@ public class MainFrame {
         moon.getOrbit().setRelativeTo(earth);
         space.addSpaceObject(ISS);
         ISS.getOrbit().setRelativeTo(earth);
-        ISS.addInstruction(new Instruction(100,0, 0, 10));
+        ISS.addInstruction(new Instruction(100_000,90, 2.0, 100.0));
 
 
         //BULLSHIT TESTING END
