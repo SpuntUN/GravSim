@@ -54,8 +54,8 @@ public class Space {
         return Vector.negate(Vector.multiply(r, G*m1*m2/Math.pow(distance, 3)));
     }
 
-    public void addSpaceObject(SpaceObject o){
-        spaceObjects.add(o);
+    public void addSpaceObject(SpaceObject o) {
+        spaceObjects.addFirst(o);
     }
 
     public ArrayList<SpaceObject> getSpaceObjects() {

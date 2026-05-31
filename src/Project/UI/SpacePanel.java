@@ -37,6 +37,7 @@ public class SpacePanel extends JPanel{
 
 
         for (SpaceObject o : space.getSpaceObjects()){
+            System.out.println(o.getName());
             SpaceObject transformedObject = transformer.TransformNewSpaceObject(o);
             paintOrbit(g2d, transformedObject);
             paintSpaceObject(g2d , transformedObject);
@@ -109,11 +110,13 @@ public class SpacePanel extends JPanel{
     }
 
     private SpaceObject spaceObjectPressed(Vector mousePos){
-        for (SpaceObject o : space.getSpaceObjects()){
+
+        // Procházení seznamu od posledního prvku k prvnímu
+        for (int i = space.getSpaceObjects().size() - 1; i >= 0; i--) {
+            SpaceObject o = space.getSpaceObjects().get(i);
             SpaceObject transformedObject = transformer.TransformNewSpaceObject(o);
             Vector pos = transformedObject.getPosition();
             double rad = transformedObject.getRadius();
-
             Vector difference = Vector.subtract(mousePos, pos);
             double x = difference.getX();
             double y = difference.getY();
@@ -126,7 +129,6 @@ public class SpacePanel extends JPanel{
     }
 
     private void paintOrbit(Graphics2D g2d, SpaceObject spaceObject){
-        Orbit orbit = spaceObject.getOrbit();
         LinkedList<Vector> positions = spaceObject.getOrbit().getPositions();
         Color color = spaceObject.getColor();
 

@@ -64,7 +64,7 @@ public class MainFrame {
         SpaceCraft ISS = new SpaceCraft(
                 "ISS",
                 50_000,
-                new Vector(Vector.add(Vector.add(earth.getPosition(), earth.getRadius()), 400000)),
+                new Vector(new Vector(earth.getPosition().getX() + earth.getRadius() + 400000, 0)),
                 new Vector(0, 36_950),
                 Color.WHITE,
                 100,
@@ -79,14 +79,14 @@ public class MainFrame {
         moon.getOrbit().setRelativeTo(earth);
         space.addSpaceObject(ISS);
         ISS.getOrbit().setRelativeTo(earth);
-        ISS.addInstruction(new Instruction());
+        ISS.addInstruction(new Instruction(100,0, 0, 10));
 
 
         //BULLSHIT TESTING END
 
         spaceObjectPanel = new SpaceObjectPanel();
         spacePanel = new SpacePanel(space, spaceObjectPanel);
-        timeManager = new TimeManager(1.0/100.0, 60);
+        timeManager = new TimeManager(1.0/100.0, 0);
         timeManagerPanel = new TimeManagerPanel(timeManager);
         shipPanel = new ShipPanel();
         controlPanel = new ControlPanel(timeManagerPanel, shipPanel);

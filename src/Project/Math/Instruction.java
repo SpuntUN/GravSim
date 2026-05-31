@@ -6,6 +6,13 @@ public class Instruction {
     private double wait;
     private double duration;
 
+    public Instruction(double thrust, double direction, double wait, double duration) {
+        this.thrust = thrust;
+        this.direction = direction;
+        this.wait = wait;
+        this.duration = duration;
+    }
+
     public boolean isActive(){
         return !waiting() && !done();
     }
