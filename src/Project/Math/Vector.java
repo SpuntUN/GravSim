@@ -141,9 +141,9 @@ public class Vector {
      * @return a new Vector mapped to the calculated Cartesian coordinates
      */
     public static Vector polarToCartesianConversion(double magnitude, double angle){
-        angle += 45;
-        double x = magnitude * Math.cos(angle);
-        double y = magnitude * Math.sin(angle);
+        double angleRadians = Math.toRadians(angle+90);
+        double x = magnitude * Math.cos(angleRadians);
+        double y = magnitude * Math.sin(angleRadians);
 
         return new Vector(y, x);
     }

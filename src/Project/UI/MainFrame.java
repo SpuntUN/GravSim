@@ -41,7 +41,7 @@ public class MainFrame {
                 new Vector(0, earth.getVelocity().getY() + 7660),
                 Color.WHITE,
                 100,
-                1_000_000,
+                1_000_000_000,
                 100_000.0
         );
 
@@ -121,7 +121,7 @@ public class MainFrame {
 
     private void loadPlanetsFromCsv(Space space, String path) {
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
-            reader.readLine(); 
+            reader.readLine();
             String line;
             while ((line = reader.readLine()) != null) {
                 line = line.strip();
