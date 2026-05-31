@@ -109,8 +109,6 @@ public class SpacePanel extends JPanel{
     }
 
     private SpaceObject spaceObjectPressed(Vector mousePos){
-
-        // Procházení seznamu od posledního prvku k prvnímu
         for (int i = space.getSpaceObjects().size() - 1; i >= 0; i--) {
             SpaceObject o = space.getSpaceObjects().get(i);
             SpaceObject transformedObject = transformer.TransformNewSpaceObject(o);

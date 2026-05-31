@@ -19,11 +19,13 @@ public class SpaceObjectPanel {
     private JLabel velocityValue;
     private JLabel radiusValue;
     private JLabel distanceValue;
+    private JLabel relativeName;
 
     private JTextField nameField;
     private JTextField massField;
 
     private JComboBox<SpaceObject> objectCombo;
+    private JComboBox<SpaceObject> relativeCombo;
 
     public SpaceObjectPanel(Space space) {
         this.space = space;
@@ -33,6 +35,11 @@ public class SpaceObjectPanel {
     private void init() {
         panel = new JPanel(new GridBagLayout());
         panel.setBackground(Color.WHITE);
+
+        Dimension lockedSize = new Dimension(400, 600);
+        panel.setPreferredSize(lockedSize);
+        panel.setMinimumSize(lockedSize);
+        panel.setMaximumSize(lockedSize);
 
         font = new Font("Arial", Font.PLAIN, 20);
 
@@ -45,13 +52,11 @@ public class SpaceObjectPanel {
 
         int y = 0;
 
-        // STATIC LABELS
         positionValue = createRow("Position:", y++, c);
         speedValue = createRow("Speed:", y++, c);
         velocityValue = createRow("Velocity:", y++, c);
         radiusValue = createRow("Radius:", y++, c);
 
-        // NAME FIELD
         nameField = new JTextField();
         nameField.setFont(font);
 
@@ -61,13 +66,12 @@ public class SpaceObjectPanel {
         setNameBtn.addActionListener(e -> {
             if (spaceObject != null) {
                 spaceObject.setName(nameField.getText());
-                refresh(); // Explicitly refresh stats after manual change
+                refresh();
             }
         });
 
         addInputRow("Name:", nameField, setNameBtn, y++, c);
 
-        // MASS FIELD
         massField = new JTextField();
         massField.setFont(font);
 
@@ -78,32 +82,39 @@ public class SpaceObjectPanel {
             if (spaceObject != null) {
                 try {
                     spaceObject.setMass(Double.parseDouble(massField.getText()));
-                    refresh(); // Explicitly refresh stats after manual change
+                    refresh();
                 } catch (Exception ignored) {}
             }
         });
 
         addInputRow("Mass:", massField, setMassBtn, y++, c);
 
-        // COMBO BOX
         objectCombo = new JComboBox<>();
         objectCombo.setFont(font);
         setComboObjects(space.getSpaceObjects());
 
-        JButton refreshBtn = new JButton("Refresh");
-        refreshBtn.setFont(font);
-
         objectCombo.addActionListener(e -> updateDistance());
 
-        addInputRow("Target:", objectCombo, refreshBtn, y++, c);
+        addInputRow("Distance To:", objectCombo, null, y++, c);
 
-        // DISTANCE LABEL
         distanceValue = new JLabel("-");
         distanceValue.setFont(font);
 
         addLabelRow("Distance:", distanceValue, y++, c);
 
-        // SPACER
+        relativeCombo = new JComboBox<>();
+        relativeCombo.setFont(font);
+        setRelativeComboObjects(space.getSpaceObjects());
+
+        relativeCombo.addActionListener(e -> updateRelative());
+
+        addInputRow("Orbit Relative To:", relativeCombo, null, y++, c);
+
+        relativeName = new JLabel("-");
+        relativeName.setFont(font);
+
+        addLabelRow("Relative To:", relativeName, y++, c);
+
         c.gridx = 0;
         c.gridy = y;
         c.gridwidth = 3;
@@ -115,9 +126,6 @@ public class SpaceObjectPanel {
         return panel;
     }
 
-    /**
-     * Call this ONLY when switching to a completely different SpaceObject.
-     */
     public void setSpaceObject(SpaceObject spaceObject) {
         this.spaceObject = spaceObject;
 
@@ -128,18 +136,22 @@ public class SpaceObjectPanel {
 
         panel.setVisible(true);
 
-        // Unconditionally populate fields because a new object was selected
         nameField.setText(spaceObject.getName());
         massField.setText(String.valueOf(spaceObject.getMass()));
 
-        // Call refresh to update the dynamic coordinate labels
+        if (spaceObject.getOrbit() != null && spaceObject.getOrbit().getRelativeTo() != null) {
+            relativeCombo.setSelectedItem(spaceObject.getOrbit().getRelativeTo());
+        } else {
+            relativeCombo.setSelectedIndex(-1);
+        }
+
+        if (objectCombo.getSelectedItem() == spaceObject) {
+            objectCombo.setSelectedIndex(-1);
+        }
+
         refresh();
     }
 
-    /**
-     * Call this repeatedly inside your simulation/render loop.
-     * It updates dynamic values without touching or overwriting user input fields.
-     */
     public void refresh() {
         if (spaceObject == null) return;
 
@@ -149,6 +161,7 @@ public class SpaceObjectPanel {
         radiusValue.setText(spaceObject.getRadiusString());
 
         updateDistance();
+        updateRelative();
     }
 
     public void setComboObjects(List<SpaceObject> objects) {
@@ -158,11 +171,18 @@ public class SpaceObjectPanel {
         }
     }
 
+    public void setRelativeComboObjects(List<SpaceObject> objects) {
+        relativeCombo.removeAllItems();
+        for (SpaceObject o : objects) {
+            relativeCombo.addItem(o);
+        }
+    }
+
     private void updateDistance() {
         if (spaceObject == null) return;
 
         SpaceObject target = (SpaceObject) objectCombo.getSelectedItem();
-        if (target == null) {
+        if (target == null || target == spaceObject) {
             distanceValue.setText("-");
             return;
         }
@@ -175,13 +195,39 @@ public class SpaceObjectPanel {
         final double KM_THRESHOLD = 1e3;
         final double AU_THRESHOLD = 1.496e11;
 
-        if (dist >= AU_THRESHOLD / 1000.0) {
+        if (dist >= AU_THRESHOLD / 100.0) {
             distanceValue.setText(String.format("%.2f AU", dist / AU_THRESHOLD));
         } else if (dist >= KM_THRESHOLD) {
             distanceValue.setText(String.format("%.2f KM", dist / KM_THRESHOLD));
         } else {
             distanceValue.setText(String.format("%.2f m", dist));
         }
+    }
+
+    private void updateRelative() {
+        if (spaceObject == null) return;
+
+        SpaceObject target = (SpaceObject) relativeCombo.getSelectedItem();
+        if (target == null) {
+            relativeName.setText("-");
+            return;
+        }
+
+        if (target == spaceObject) {
+            relativeCombo.setSelectedIndex(-1);
+            return;
+        }
+
+        if (spaceObject.getOrbit() == null) return;
+
+        if (spaceObject.getOrbit().getRelativeTo() == target) {
+            relativeName.setText(target.getName());
+            return;
+        }
+
+        spaceObject.getOrbit().getPositions().clear();
+        spaceObject.getOrbit().setRelativeTo(target);
+        relativeName.setText(target.getName());
     }
 
     private JLabel createRow(String label, int y, GridBagConstraints c) {
@@ -216,9 +262,11 @@ public class SpaceObjectPanel {
         c.weightx = 1;
         panel.add(input, c);
 
-        c.gridx = 2;
-        c.weightx = 0;
-        panel.add(button, c);
+        if (button != null) {
+            c.gridx = 2;
+            c.weightx = 0;
+            panel.add(button, c);
+        }
     }
 
     private void addLabelRow(String label, JLabel value, int y, GridBagConstraints c) {
