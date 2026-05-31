@@ -12,6 +12,9 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+/**
+ * Main Panel showing all spaceObjects. Extends JPanel to Overried paintComponent method.
+ */
 public class SpacePanel extends JPanel{
     private Space space;
     private SpaceObjectPanel spaceObjectPanel;
@@ -26,6 +29,11 @@ public class SpacePanel extends JPanel{
         init();
     }
 
+    /**
+     * Sets up Graphics 2D.
+     * Transforms each spaceObject for Space and draws it.
+     * @param g the <code>Graphics</code> object to protect
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -110,6 +118,11 @@ public class SpacePanel extends JPanel{
 
     }
 
+    /**
+     * Checks if a position is on a positon where a spaceobject is.
+     * @param mousePos mouse position at the point of being pressed.
+     * @return the object pressed, or null if none was pressed
+     */
     private SpaceObject spaceObjectPressed(Vector mousePos){
         for (int i = space.getSpaceObjects().size() - 1; i >= 0; i--) {
             SpaceObject o = space.getSpaceObjects().get(i);

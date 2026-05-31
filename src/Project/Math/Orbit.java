@@ -3,6 +3,9 @@ package Project.Math;
 import java.awt.*;
 import java.util.LinkedList;
 
+/**
+ * Holds individual positions for a complete path of an orbit.
+ */
 public class Orbit {
     private LinkedList<Vector> positions;
     private int maxTrail;
@@ -24,6 +27,11 @@ public class Orbit {
     }
 
 
+    /**
+     * Adds position to a linked list path.
+     * Add only the 50 to improve loading and reduce lag.
+     * @param pos
+     */
     public void addPosition(Vector pos){
         counter++;
         if (counter < 50) return;

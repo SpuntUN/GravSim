@@ -29,11 +29,10 @@ public class ControlPanel {
         panel.add(timeManagerPanel.getRoot(), BorderLayout.WEST);
         panel.add(instructionPanelManager.getRoot(), BorderLayout.CENTER);
 
-        // Telemetry Sidebar
         JPanel telemetryPanel = new JPanel(new GridLayout(2, 1, 5, 5));
         telemetryPanel.setBorder(BorderFactory.createTitledBorder(
                 BorderFactory.createLineBorder(Color.GRAY, 1), "Craft Status"));
-        telemetryPanel.setPreferredSize(new Dimension(260, 0)); // Widened slightly for units
+        telemetryPanel.setPreferredSize(new Dimension(260, 0));
         telemetryPanel.setBackground(Color.WHITE);
 
         fuelLabel = new JLabel("Fuel: 0.00 L / 0.00 L");
@@ -55,7 +54,6 @@ public class ControlPanel {
         instructionPanelManager.refreshUI();
 
         if (spaceCraft != null) {
-            // Leverage the brand new string conversion methods
             fuelLabel.setText("Fuel: " + spaceCraft.getFuelString() + " / " + spaceCraft.getMaxFuelString());
             thrustLabel.setText("Max Thrust: " + spaceCraft.getMaxThrustString());
 
