@@ -8,6 +8,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 
+/**
+ * The only Frame in this APP. Handles time, panels, holds spaceobjects.
+ * Reads planets from a CSV.
+ */
+
 public class MainFrame {
 
     private JFrame frame;
@@ -79,6 +84,10 @@ public class MainFrame {
         timer.start();
     }
 
+    /**
+     * Updates Space and sends it passed time.
+     * Also updates every panels update method or repaint.
+     */
     private void run(){
 
         timeManager.accumulate(System.nanoTime());
@@ -103,10 +112,16 @@ public class MainFrame {
     }
 
 
+    /**
+     * Simple (Self explanatory).
+     * @param space Adds loaded planets to
+     * @param path
+     * @Author Adam Švec
+     */
 
     private void loadPlanetsFromCsv(Space space, String path) {
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
-            reader.readLine(); // Header
+            reader.readLine(); 
             String line;
             while ((line = reader.readLine()) != null) {
                 line = line.strip();

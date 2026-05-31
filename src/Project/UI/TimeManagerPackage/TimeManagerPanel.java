@@ -1,11 +1,16 @@
 package Project.UI.TimeManagerPackage;
 
+import Project.Math.SpaceObject;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Shows information gotten from {@link TimeManager} and allows to change its attributes.
+ */
 public class TimeManagerPanel {
 
     private JPanel panel;
@@ -55,6 +60,9 @@ public class TimeManagerPanel {
         simulatedTimeLabel.setText("Simulation Time: " + timeManager.getTimeString(timeManager.getSimulatedTime()));
     }
 
+    /**
+     * Initializes the info panel to display the real and simulated elapsed time.
+     */
     private void infoPanelInit() {
         infoPanel = new JPanel();
         infoPanel.setLayout(new GridLayout(2, 1));
@@ -71,6 +79,9 @@ public class TimeManagerPanel {
         infoPanel.add(simulatedTimeLabel);
     }
 
+    /**
+     * Initializes the attributes panel with simulation frequency and speed controls.
+     */
     public void attributePanelInit() {
         attributesPanel = new JPanel();
         attributesPanel.setLayout(new GridLayout(2, 3));

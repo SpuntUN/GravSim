@@ -1,7 +1,8 @@
 package Project.Math;
 
 /**
- *
+ * Hold information for {@link SpaceObject} for how and when should it changes
+ * its attributes.
  */
 public class Instruction {
     private double thrust;
@@ -20,6 +21,11 @@ public class Instruction {
         return !waiting() && !done();
     }
 
+    /**
+     * Reduces either duration if parent SpaceCraft is burning, or waiting time.
+     * If none does nothing.
+     * @param time in simulation time
+     */
     public void update(double time){
         if (isActive()){
             duration -= time;

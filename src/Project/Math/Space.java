@@ -2,6 +2,9 @@ package Project.Math;
 
 import java.util.ArrayList;
 
+/**
+ * Holds {@link SpaceObject} and handles physics interactions between them.
+ */
 public class Space {
     private ArrayList<SpaceObject> spaceObjects;
     private int scale;
@@ -45,6 +48,12 @@ public class Space {
 
     }
 
+    /**
+     * Calculates Gravitational Force between two spaceObjects
+     * @param o1 first SpaceObject
+     * @param o2 second SpaceObject
+     * @return resulting force
+     */
     private Vector calculateForce(SpaceObject o1, SpaceObject o2){
         Vector r = Vector.subtract(o1.getPosition(), o2.getPosition());
         double distance = Vector.normalize(r);

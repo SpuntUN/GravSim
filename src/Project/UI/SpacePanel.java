@@ -35,6 +35,7 @@ public class SpacePanel extends JPanel{
         g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
         g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
 
+        g2d.setFont(new Font("Arial", Font.BOLD, 16));
 
         for (SpaceObject o : space.getSpaceObjects()){
             SpaceObject transformedObject = transformer.TransformNewSpaceObject(o);
@@ -57,6 +58,7 @@ public class SpacePanel extends JPanel{
             );
 
             g2d.fill(oval);
+            g2d.drawString(o.getName(), (float) (pos.getX() + rad), (float) (pos.getY() - rad));
     }
 
 

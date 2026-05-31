@@ -3,7 +3,7 @@ package Project.Math;
 import java.awt.*;
 
 /**
- *
+ * Object which physics is updated and changed according to its attributes.
  */
 
 public class SpaceObject {
@@ -72,6 +72,11 @@ public class SpaceObject {
         this.minimalScreenRadius = 0;
     }
 
+    /**
+     * Performs linear calculation for a given time. It is important to calculate velocity
+     * before position, as the inverse is instable.
+     * @param time in simulation time
+     */
     public void update(double time){
         Vector acceleration = Vector.divide(force, mass);
 

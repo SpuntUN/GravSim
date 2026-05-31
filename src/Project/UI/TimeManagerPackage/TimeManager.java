@@ -1,5 +1,9 @@
 package Project.UI.TimeManagerPackage;
 
+/**
+ * Manages simulation speed, simulation frequency and performs different
+ * calculations, based on that.
+ */
 public class TimeManager {
     private double timeSinceStart;
     private double simulatedTime;
@@ -23,6 +27,11 @@ public class TimeManager {
 
     }
 
+    /**
+     * Accumulation is used to framerate independen.
+     * Based of simulation frequency makes as many calcu
+     * @param currentTime
+     */
     public void accumulate(long currentTime){
         frameTime = (currentTime-lastTime)/1_000_000_000.0;
         if (frameTime > 1) speed = 0;

@@ -7,6 +7,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * Shows information about a selected SpaceObject.
+ * Selected objects attributes can be changed.
+ */
+
 public class SpaceObjectPanel {
 
     private JPanel panel;
@@ -31,6 +36,7 @@ public class SpaceObjectPanel {
         this.space = space;
         init();
     }
+
 
     private void init() {
         panel = new JPanel(new GridBagLayout());
@@ -230,6 +236,11 @@ public class SpaceObjectPanel {
         relativeName.setText(target.getName());
     }
 
+
+    /**
+     * Creates and adds a text row with a label and a default "-" value display.
+     * @return The dynamic value label.
+     */
     private JLabel createRow(String label, int y, GridBagConstraints c) {
         JLabel l1 = new JLabel(label);
         l1.setFont(font);
@@ -249,6 +260,9 @@ public class SpaceObjectPanel {
         return l2;
     }
 
+    /**
+     * Adds an interactive input row with an optional action button.
+     */
     private void addInputRow(String label, JComponent input, JButton button, int y, GridBagConstraints c) {
         JLabel l1 = new JLabel(label);
         l1.setFont(font);
@@ -269,6 +283,9 @@ public class SpaceObjectPanel {
         }
     }
 
+    /**
+     * Adds a display row using a pre-existing value label.
+     */
     private void addLabelRow(String label, JLabel value, int y, GridBagConstraints c) {
         JLabel l1 = new JLabel(label);
         l1.setFont(font);

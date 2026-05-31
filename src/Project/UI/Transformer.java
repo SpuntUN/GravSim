@@ -6,6 +6,9 @@ import Project.Math.Vector;
 
 import java.util.LinkedList;
 
+/**
+ * Handles camera. Scales space objects.
+ */
 public class Transformer {
     private double scale;
     private double scaleFactor;
@@ -32,6 +35,11 @@ public class Transformer {
         scaleFactor = 1.1;
     }
 
+    /**
+     * Takes world spaceobject and transfroms it into screen object.
+     * @param spaceObject being transformed
+     * @return
+     */
     public SpaceObject TransformNewSpaceObject(SpaceObject spaceObject){
         SpaceObject transformedObject = new SpaceObject(spaceObject);
 
@@ -95,7 +103,10 @@ public class Transformer {
         offset = Vector.subtract(offset, vector);
     }
 
-
+    /**
+     * @param mouse screen mouse coordinates
+     * @param zoomIn true means changing zooming in, reducing the scale factor.
+     */
     public void zoomAt(Vector mouse, boolean zoomIn) {
 
         double oldScale = scale;
@@ -133,6 +144,11 @@ public class Transformer {
         return transformed;
     }
 
+
+    /**
+     * Sets an objects so it never changes screen position.
+     * @param followedObject if null sets no object.
+     */
     public void setCenteredObject(SpaceObject followedObject){
         if (startingFollowingPosition != null){
             startingFollowingPosition = Vector.add(Vector.subtract(startingFollowingPosition,this.followedObject.getPosition()), followedObject.getPosition())  ;
