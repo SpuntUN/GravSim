@@ -1,42 +1,39 @@
 package Project.UI;
 
-import Project.UI.TimeManagerPackage.TimeManager;
 import Project.UI.TimeManagerPackage.TimeManagerPanel;
+import Project.Math.SpaceCraft;
 
 import javax.swing.*;
 import java.awt.*;
-import java.sql.Time;
 
 public class ControlPanel {
     private JPanel panel;
     private TimeManagerPanel timeManagerPanel;
-    private ShipPanel shipPanel;
+    private InstructionPanelManager instructionPanelManager;
 
-    public ControlPanel(TimeManagerPanel timeManagerPanel, ShipPanel shipPanel){
+    public ControlPanel(TimeManagerPanel timeManagerPanel, SpaceCraft craft) {
+
         this.timeManagerPanel = timeManagerPanel;
-        this.shipPanel = shipPanel;
+        this.instructionPanelManager = new InstructionPanelManager(craft);
+
         init();
     }
 
     public void init() {
-
-        panel = new JPanel();
-        panel.setLayout(new BorderLayout());
+        panel = new JPanel(new BorderLayout());
 
         panel.add(timeManagerPanel.getRoot(), BorderLayout.WEST);
-        panel.add(shipPanel.getRoot(), BorderLayout.EAST);
-
+        panel.add(instructionPanelManager.getRoot(), BorderLayout.CENTER);
 
         panel.setBackground(Color.WHITE);
     }
 
-    public void updateComponents(){
+    public void updateComponents() {
         timeManagerPanel.updateLabels();
+        instructionPanelManager.refreshUI();
     }
 
-    public JPanel getRoot(){
+    public JPanel getRoot() {
         return panel;
     }
-
-
 }

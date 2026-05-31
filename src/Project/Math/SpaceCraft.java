@@ -73,4 +73,15 @@ public class SpaceCraft extends SpaceObject{
         instructions.add(instruction);
     }
 
+    public void removeInstruction(Instruction instruction){
+        instructions.remove(instruction);
+    }
+
+    public ArrayList<Instruction> getInstructions() {
+        return instructions;
+    }
+
+    public void setInstructions(ArrayList<Instruction> instructions) {
+        this.instructions = instructions;
+    }
 }

@@ -270,4 +270,6 @@ public class SpaceObject {
     public void setOrbit(Orbit orbit) {
         this.orbit = orbit;
     }
+
+
 }

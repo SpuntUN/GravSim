@@ -42,7 +42,7 @@ public class SpaceObjectPanel {
         }
 
         GridBagConstraints c = new GridBagConstraints();
-        c.insets = new Insets(2, 6, 2, 6);
+        c.insets = new Insets(2, 5, 2, 6);
         c.anchor = GridBagConstraints.NORTHWEST;
         c.fill = GridBagConstraints.NONE;
         c.weightx = 1;
@@ -77,8 +77,8 @@ public class SpaceObjectPanel {
         JLabel l2 = new JLabel(value);
         l2.setFont(font);
 
-        l2.setMaximumSize(new Dimension(300, Integer.MAX_VALUE));
-        l2.setPreferredSize(new Dimension(300, l2.getPreferredSize().height));
+        l2.setMaximumSize(new Dimension(250, Integer.MAX_VALUE));
+        l2.setPreferredSize(new Dimension(250, l2.getPreferredSize().height));
 
         c.gridy = y;
 

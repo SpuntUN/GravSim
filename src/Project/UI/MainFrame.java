@@ -16,7 +16,6 @@ public class MainFrame {
     private ControlPanel controlPanel;
     private TimeManager timeManager;
     private TimeManagerPanel timeManagerPanel;
-    private ShipPanel shipPanel;
 
 
     public MainFrame() {
@@ -79,7 +78,8 @@ public class MainFrame {
         moon.getOrbit().setRelativeTo(earth);
         space.addSpaceObject(ISS);
         ISS.getOrbit().setRelativeTo(earth);
-        ISS.addInstruction(new Instruction(100_000,90, 2.0, 100.0));
+        ISS.addInstruction(new Instruction(100_000,0, 2.0, 100.0));
+        ISS.addInstruction(new Instruction(100_000,90, 3600, 1000.0));
 
 
         //BULLSHIT TESTING END
@@ -88,8 +88,7 @@ public class MainFrame {
         spacePanel = new SpacePanel(space, spaceObjectPanel);
         timeManager = new TimeManager(1.0/100.0, 0);
         timeManagerPanel = new TimeManagerPanel(timeManager);
-        shipPanel = new ShipPanel();
-        controlPanel = new ControlPanel(timeManagerPanel, shipPanel);
+        controlPanel = new ControlPanel(timeManagerPanel, ISS);
 
 
     }
@@ -128,6 +127,7 @@ public class MainFrame {
             timeManager.reduceAccumulationByDt();
         }
 
+        controlPanel.updateComponents();
         spaceObjectPanel.refresh();
         timeManagerPanel.updateLabels();
         spacePanel.repaint();
