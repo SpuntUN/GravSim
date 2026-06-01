@@ -5,12 +5,12 @@ import Project.Math.SpaceCraft;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
- * Shows instrcution form a selected spaceCraft.
- * Largely made with AI.
+ * Shows instructions for a selected spacecraft.
  */
-
 public class InstructionPanelManager {
 
     private JPanel root;
@@ -25,6 +25,8 @@ public class InstructionPanelManager {
     private JTextField durationField;
 
     private JPanel inputCard;
+
+    private final Map<Instruction, JPanel> cardMap = new LinkedHashMap<>();
 
     private static final Font LABEL_FONT = new Font("Arial", Font.PLAIN, 18);
     private static final Font FIELD_FONT = new Font("Arial", Font.PLAIN, 18);
@@ -114,13 +116,13 @@ public class InstructionPanelManager {
 
     private double parse(String s) {
         try {
-            return Double.parseDouble(s);
+            return Double.parseDouble(s.trim());
         } catch (Exception e) {
             return 0;
         }
     }
 
-    private void addInstructionCard(Instruction instruction) {
+    private JPanel createInstructionCard(Instruction instruction) {
         JPanel card = new JPanel(new BorderLayout(8, 8));
         card.setPreferredSize(new Dimension(240, 140));
         card.setBorder(BorderFactory.createLineBorder(Color.GRAY, 2));
@@ -141,14 +143,31 @@ public class InstructionPanelManager {
         card.add(label, BorderLayout.CENTER);
         card.add(remove, BorderLayout.EAST);
 
-        listPanel.add(card);
+        return card;
     }
 
     public void refreshUI() {
-        listPanel.removeAll();
+        // Remove cards for instructions that no longer exist
+        cardMap.entrySet().removeIf(entry -> {
+            if (!spaceCraft.getInstructions().contains(entry.getKey())) {
+                listPanel.remove(entry.getValue());
+                return true;
+            }
+            return false;
+        });
 
+        // Add new cards, and update existing labels
         for (Instruction instruction : spaceCraft.getInstructions()) {
-            addInstructionCard(instruction);
+            JPanel card = cardMap.get(instruction);
+
+            if (card == null) {
+                card = createInstructionCard(instruction);
+                cardMap.put(instruction, card);
+                listPanel.add(card);
+            } else {
+                JLabel label = (JLabel) card.getComponent(0);
+                label.setText(format(instruction));
+            }
         }
 
         listPanel.revalidate();
