@@ -103,7 +103,7 @@ public class InstructionPanelManager {
     }
 
     private void createInstruction() {
-        double thrust = parse(thrustField.getText());
+        double thrust = Math.min(parse(thrustField.getText()), spaceCraft.getMaxThrust());
         double direction = parse(directionField.getText());
         double wait = parse(waitField.getText());
         double duration = parse(durationField.getText());
@@ -147,7 +147,6 @@ public class InstructionPanelManager {
     }
 
     public void refreshUI() {
-        // Remove cards for instructions that no longer exist
         cardMap.entrySet().removeIf(entry -> {
             if (!spaceCraft.getInstructions().contains(entry.getKey())) {
                 listPanel.remove(entry.getValue());
@@ -156,7 +155,6 @@ public class InstructionPanelManager {
             return false;
         });
 
-        // Add new cards, and update existing labels
         for (Instruction instruction : spaceCraft.getInstructions()) {
             JPanel card = cardMap.get(instruction);
 
